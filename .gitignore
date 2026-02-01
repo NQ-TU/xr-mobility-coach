@@ -1,0 +1,38 @@
+# IDEs / Editors
+.idea/
+*.iml
+.vscode/
+
+# Java / Maven / Spring Boot
+target/
+*.class
+*.log
+hs_err_pid*
+dependency-reduced-pom.xml
+
+# Spring Boot config (local only)
+application-local.properties
+application-local.yml
+application-dev.properties
+application-dev.yml
+
+# Godot (GDScript / XR)
+.godot/
+.import/
+export_presets.cfg
+*.translation
+*.tmp
+.nomedia
+
+# Databases
+postgres-data/
+pgadmin_data/
+
+# OS / System
+.DS_Store
+Thumbs.db
+
+# Misc / temp files
+*.swp
+*.bak
+*.tmp

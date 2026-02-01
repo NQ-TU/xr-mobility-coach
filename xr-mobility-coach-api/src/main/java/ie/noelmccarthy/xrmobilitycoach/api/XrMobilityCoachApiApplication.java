@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class XrMobilityCoachApiApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(XrMobilityCoachApiApplication.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(XrMobilityCoachApiApplication.class, args);
+	}
 
 }

@@ -1,0 +1,37 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: xr-mobility-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: xr_mobility
+      POSTGRES_USER: xr_user
+      POSTGRES_PASSWORD: xr_password
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U xr_user -d xr_mobility"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: xr-mobility-pgadmin
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@local.dev
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+
+volumes:
+  postgres_data:
+  pgadmin_data:
