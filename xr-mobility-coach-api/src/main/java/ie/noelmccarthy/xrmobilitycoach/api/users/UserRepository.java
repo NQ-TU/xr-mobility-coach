@@ -1,0 +1,12 @@
+package ie.noelmccarthy.xrmobilitycoach.api.users;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Optional;
+import java.util.UUID;
+
+/** User repository for lookup by email and id. */
+public interface UserRepository extends JpaRepository<User, UUID> {
+    Optional<User> findByEmailIgnoreCase(String email);
+    boolean existsByEmailIgnoreCase(String email);
+}
