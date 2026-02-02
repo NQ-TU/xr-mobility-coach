@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import java.time.Instant;
 import java.util.UUID;
 
+/** User entity persisted in the database. */
 @Entity
 @Table(name = "users")
 public class User {

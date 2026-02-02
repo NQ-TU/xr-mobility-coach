@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.util.UUID;
 
+/** Issues JWTs for authenticated users. */
 @Service
 public class JwtService {
 
@@ -27,6 +28,7 @@ public class JwtService {
         this.ttlSeconds = ttlSeconds;
     }
 
+    /** Issue a signed JWT with standard claims and the user's email. */
     public String issueToken(UUID userId, String email) {
         Instant now = Instant.now();
         Instant exp = now.plusSeconds(ttlSeconds);
@@ -39,6 +41,7 @@ public class JwtService {
                 .claim("email", email)
                 .build();
 
+        // Explicitly set HS256 so Nimbus can select the HMAC signing key.
         JwsHeader headers = JwsHeader.with(MacAlgorithm.HS256).build();
         return jwtEncoder.encode(JwtEncoderParameters.from(headers, claims)).getTokenValue();
     }

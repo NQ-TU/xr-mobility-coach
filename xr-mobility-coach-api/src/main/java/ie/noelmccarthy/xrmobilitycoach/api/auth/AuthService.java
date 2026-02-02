@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+/** Auth domain logic for registering and logging in users. */
 @Service
 public class AuthService {
 
@@ -24,6 +25,7 @@ public class AuthService {
         this.jwtService = jwtService;
     }
 
+    /** Register a new user, returning a token and user details. */
     public AuthResponse register(String emailRaw, String passwordRaw) {
         String email = normaliseEmail(emailRaw);
 
@@ -39,6 +41,7 @@ public class AuthService {
         return new AuthResponse(token, user.getId(), user.getEmail());
     }
 
+    /** Authenticate a user, returning a token and user details. */
     public AuthResponse login(String emailRaw, String passwordRaw) {
         String email = normaliseEmail(emailRaw);
 
@@ -53,6 +56,7 @@ public class AuthService {
         return new AuthResponse(token, user.getId(), user.getEmail());
     }
 
+    /** Normalize email input for consistent lookup and storage. */
     private String normaliseEmail(String email) {
         return email == null ? null : email.trim().toLowerCase();
     }

@@ -24,16 +24,19 @@ import java.nio.charset.StandardCharsets;
 
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
 
+/** Security configuration for stateless JWT auth. */
 @Configuration
 public class SecurityConfig {
 
     @Bean
+    /** Configure stateless security with JWT resource server support. */
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                // Stateless APIs don't use CSRF tokens.
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/api/auth/register", "/api/auth/login").permitAll()
                         .requestMatchers("/actuator/health").permitAll()
                         .anyRequest().authenticated()
                 )
@@ -42,17 +45,20 @@ public class SecurityConfig {
     }
 
     @Bean
+    /** BCrypt is used for storing user passwords securely. */
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
+    /** HMAC-based JWT encoder using the shared secret. */
     JwtEncoder jwtEncoder(@Value("${security.jwt.secret}") String secret) {
         SecretKey key = new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8), "HmacSHA256");
         return new NimbusJwtEncoder(new ImmutableSecret<>(key));
     }
 
     @Bean
+    /** HMAC-based JWT decoder using the shared secret. */
     JwtDecoder jwtDecoder(@Value("${security.jwt.secret}") String secret) {
         SecretKey key = new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8), "HmacSHA256");
         return NimbusJwtDecoder.withSecretKey(key).build();
