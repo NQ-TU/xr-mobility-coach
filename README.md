@@ -22,11 +22,13 @@ This repository contains all components of the system, structured as a multi-app
 ## Status
 This project is under active development. See change logs below.
 
-# Backend
+# Backend: xr-mobility-coach-api
 
-- Stack: Spring Boot 3.5.10 + Java 17 + JPA + Flyway + PostgreSQL, JWT via OAuth2 resource server.
+### Tech Stack
 
-**Change logs**
+- Spring Boot 3.5.10 + Java 17 + JPA + Flyway + PostgreSQL, JWT via OAuth2 resource server.
+
+# Change logs
 
 ## (PR#1): feature: implemented stateless JWT auth with register/login/me endpoints and secure API
 https://github.com/NQ-TU/xr-mobility-coach/pull/1
@@ -73,3 +75,115 @@ This establishes the foundation for user personalisation and future XR / LLM-dri
 - No additional security configuration was required, existing JWT enforcement applies
 - Profile data is fully owned by the authenticated user (no cross user access)
 - Logging avoids sensitive data and focuses on domain level events
+
+## (PR#3): feature: Adding exercise DTOs, pageable exercise API addition, provides exercise catalogue functionality
+https://github.com/NQ-TU/xr-mobility-coach/pull/3
+
+This PR introduces our exercise DTO, service, repository and controller.
+
+This establishes the functionality for our exercise catalogue, which will be used to populate routines later. 
+
+#### Features added
+- `GET /api/exercises` - return from exercise table  
+  - 20 record limit set through `@PageableDefault(size = 20, sort = "name") Pageable pageable)`
+- `GET /api/exercises?q=curl&muscleGroup=Spine` - Allows for partial search & by muscleGroup filters 
+  - Search parameters we will want in Routine builder page. 
+- Stateless, JWT authenticated access (reuses existing security config)
+- DTO based request / response boundaries
+- Logging for filtered requests
+
+#### Notes
+
+- This endpoint is intentionally read only: exercise addition will be managed by migrations to ensure catalogue consistency, keeping purely metadata available that coincides with our XR exercise catalogue, rather than runtime CRUD.
+- Pagination is implemented server side using Spring Pageable to ensure scalability and avoid loading large datasets into memory
+
+## (PR#4): feature: implementing user owned routine management, create/update/delete, DTO response/request, ordered sequence, expose 5 endpoints
+https://github.com/NQ-TU/xr-mobility-coach/pull/4 
+
+This PR introduces the routines domain layer as part of the XR Mobility Coach backend architecture.
+
+The routines module establishes a user owned structured exercise workflow that serves as the core execution model for:
+
+- XR guided sessions
+- Session tracking and analytics
+- AI generated routine personalization
+
+This aligns with the layered architecture separating:
+
+- Exercise catalogue (reference data)
+- User routines (mutable domain state)
+- Sessions (execution history)
+
+#### Features added
+- `GET /api/routines?page=0&size=10&sort=createdAt,desc` - get paginated list of routines
+- `GET /api/routines/{id}` - get routine details for specific routine 
+- `POST /api/routines` - Create routine 
+- `PUT /api/routines/{id}` - Update existing routine
+- `DELETE /api/routines/{id}` - Delete a routine
+- Service layer validation
+- Ownership enforced via JWT 
+- DTO request/response boundaries#
+- Exercise must exist in DB for create/update
+ - Enforces our exercise catalogue 
+
+
+#### Domain Model
+
+``Routine``
+- Represents a user owned mobility workflow
+- Contains ordered list of RoutineExercise items
+
+``RoutineExercise``
+- Links a Routine to Exercise catalogue entries
+- Maintains sequenceIndex for deterministic ordering
+- Stores execution metadata (sets, tempo, reps/hold etc)
+
+``Exercise``
+- Immutable catalogue reference entity
+
+#### API Design Notes
+
+- Exercises remain read only catalogue data
+- Routines are fully user owned resources
+- DTOs used to maintain separation between persistence and API contracts
+- Pagination implemented using Spring Pageable
+
+## (PR#5): feature: add session creation endpoint with per exercise metrics capturing for XR completed routines
+https://github.com/NQ-TU/xr-mobility-coach/pull/5 
+
+This PR introduces the session metrics capture layer for the XR mobility coach backend.
+
+It enables the XR client to submit a single completed session payload with per exercise performance data, forming the foundation for:
+
+- End to end XR functionality now possible. 
+- Session history & analytics tracking including user progress tracking
+
+#### Features added
+- `POST /api/sessions` - record a completed session with metrics
+- Session + metric persistance (`sessions`, `session_exercise_metrics`)
+- Routine ownership validation (JWT user must own routine)
+- Exercise existence validation for metrics 
+- Basic payload validation (timestsamps, duplicate setIndex, skips/completed constraints)
+- DTO request/response boundaries 
+
+#### Domain Model
+
+`Session`
+- Represents a completed XR routine execution
+- Linked to a user and routine
+- Stores timestamps + overall RPE
+
+`SessionExerciseMetric`
+- Links a Session to Exercise catalogue exercise
+- Captures setIndex, reps, time under tension, RPE, notes etc. 
+
+`Exercise`
+- Immutable catalogue reference entity
+
+#### API Design Notes
+
+- XR client posts one payload at session end (no start endpoint required)
+- startedAt/endedAt provided by XR client
+- routineId required and must belong to user
+- setIndex is 1‑based (no 0)
+- Metrics validated for duplicates and invalid exercise IDs
