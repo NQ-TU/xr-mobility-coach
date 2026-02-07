@@ -31,6 +31,9 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background: radial-gradient(1200px 800px at 20% 10%, rgba(99,102,241,.10), transparent 60%),
+              radial-gradient(900px 700px at 90% 20%, rgba(45,212,191,.10), transparent 55%),
+              #f7f8fb;
 }
 
 h1 {
