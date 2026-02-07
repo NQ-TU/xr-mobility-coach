@@ -3,7 +3,7 @@
 **Final Year Project – BSc (Hons) Computer Science**  
 Technological University Dublin
 
-**Student:** Noel McCarthy  
+**Author:** Noel McCarthy  
 **Academic Year:** 2025–2026  
 
 ---
