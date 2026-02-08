@@ -42,6 +42,8 @@ public class UserProfileService {
             isNew = true;
         }
         profile.setPreferredSessionLength(req.preferredSessionLength());
+        profile.setFirstName(req.firstName());
+        profile.setLastName(req.lastName());
         profile.setTrainingExperience(req.trainingExperience());
         profile.setTargetAreas(req.targetAreas());
         profile.setNotes(req.notes());
@@ -57,6 +59,8 @@ public class UserProfileService {
     private static UserProfileResponse toResponse(UserProfile profile) {
         return new UserProfileResponse(
                 profile.getPreferredSessionLength(),
+                profile.getFirstName(),
+                profile.getLastName(),
                 profile.getTrainingExperience(),
                 profile.getTargetAreas(),
                 profile.getNotes(),

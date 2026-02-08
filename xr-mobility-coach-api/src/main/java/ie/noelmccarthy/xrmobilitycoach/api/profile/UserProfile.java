@@ -19,6 +19,12 @@ public class UserProfile {
     @Column(name = "preferred_session_length")
     private Integer preferredSessionLength;
 
+    @Column(name = "first_name", length = 100)
+    private String firstName;
+
+    @Column(name = "last_name", length = 100)
+    private String lastName;
+
     @Column(name = "training_experience", length = 100)
     private String trainingExperience;
 
@@ -57,6 +63,8 @@ public class UserProfile {
     public UUID getId() { return id; }
     public UUID getUserId() { return userId; }
     public Integer getPreferredSessionLength() { return preferredSessionLength; }
+    public String getFirstName() { return firstName; }
+    public String getLastName() { return lastName; }
     public String getTrainingExperience() { return trainingExperience; }
     public String getTargetAreas() { return targetAreas; }
     public String getNotes() { return notes; }
@@ -65,6 +73,14 @@ public class UserProfile {
 
     public void setPreferredSessionLength(Integer preferredSessionLength) {
         this.preferredSessionLength = preferredSessionLength;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public void setTrainingExperience(String trainingExperience) {
