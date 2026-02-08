@@ -1,28 +1,24 @@
-import { Switch, Route, Redirect } from "wouter";
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// Root UI router: Decides which page component to render based on the URL path. Also handles protected routes.
+import { Redirect, Route, Switch } from "wouter";
+import AuthPage from "@/pages/auth";
+import OverviewPage from "@/pages/overview";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function App() {
   return (
-    <>
-      <h1>XR Mobility Coach Dashboard</h1>
-      <div className="card">
-        <p>
-          Noel McCarthy, C22533826 
-        </p>
-        <p>
-          Vite + React + Tailwind CSS + Wouter 
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Base skeleton project for XR Mobility Coach Dashboard
-      </p>
-    </>
-  )
+    <Switch>
+      <Route path="/auth" component={AuthPage} />
+      <Route path="/overview">
+        <ProtectedRoute>
+          <OverviewPage />
+        </ProtectedRoute>
+      </Route>
+      <Route path="/">
+        <Redirect to="/auth" />
+      </Route>
+      <Route>
+        <Redirect to="/auth" />
+      </Route>
+    </Switch>
+  );
 }
-
-export default App
