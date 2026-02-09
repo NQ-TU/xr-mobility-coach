@@ -12,8 +12,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Dumbbell } from "lucide-react";
+import { Dumbbell, ArrowRight, Sparkles } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { upsertProfile } from "@/lib/profile";
 
@@ -60,57 +59,85 @@ export default function AuthPage() {
 
   // UI layout with tabs for login/register, forms for email/password, and error display
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] from-primary/10 via-background to-background">
-      <div className="glass-panel w-full max-w-2xl rounded-3xl px-8 py-10 md:px-12">
-        <div className="w-full max-w-md mx-auto space-y-8">
-        <div className="text-center space-y-2">
-          <div className="mx-auto size-12 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg shadow-primary/20">
-            <Dumbbell className="text-white size-7" />
+    <div className="min-h-screen w-full flex items-center justify-center p-4 relative overflow-hidden bg-transparent">
+      <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-primary/20 rounded-full blur-[100px]" />
+      <div className="absolute bottom-[-20%] left-[-10%] w-[500px] h-[500px] bg-secondary/30 rounded-full blur-[100px]" />
+
+      <div className="glass-panel w-full max-w-5xl rounded-3xl px-8 py-10 md:px-12">
+        <div className="w-full grid md:grid-cols-2 gap-8">
+          <div className="flex flex-col justify-center p-2 space-y-6">
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-10 rounded-xl bg-primary flex items-center justify-center shadow-lg shadow-primary/30">
+                <Dumbbell className="h-6 w-6 text-primary-foreground" />
+              </div>
+              <h1 className="text-2xl font-display font-bold text-foreground">MobilityXR</h1>
+            </div>
+
+            <div className="space-y-4">
+              <h2 className="text-4xl md:text-5xl font-display font-bold leading-tight">
+                Move Better.<br />
+                <span className="text-primary">Live Longer.</span>
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-md">
+                Your AI-powered mobility coach. Restore range of motion, reduce pain, and optimize your movement health.
+              </p>
+            </div>
+
+            <div className="flex flex-wrap gap-4 pt-2">
+              <div className="glass-card p-4 flex items-center gap-3 w-fit">
+                <Sparkles className="text-primary h-5 w-5" />
+                <span className="font-medium">AI Routine Builder</span>
+              </div>
+              <div className="glass-card p-4 flex items-center gap-3 w-fit">
+                <span className="font-medium">Progress Tracking</span>
+              </div>
+            </div>
           </div>
-          <h1 className="text-3xl font-display font-bold tracking-tight">MobilityXR</h1>
-          <p className="text-muted-foreground">AI-Powered Mobility Coaching</p>
-        </div>
 
-        <Tabs value={mode} onValueChange={(value) => setMode(value as Mode)} className="w-full">
-          <TabsList className="grid w-full grid-cols-2 mb-4 bg-white/40 dark:bg-slate-900/40 backdrop-blur-sm p-1">
-            <TabsTrigger value="register">Register</TabsTrigger>
-            <TabsTrigger value="login">Login</TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="register">
-            <Card className="glass-card border-none shadow-xl">
-              <CardHeader>
-                <CardTitle>Create an account</CardTitle>
-                <CardDescription>Start your mobility journey today.</CardDescription>
+          <div className="flex items-center justify-center">
+            <Card className="glass-card w-full max-w-md border-none shadow-2xl">
+              <CardHeader className="text-center">
+                <CardTitle className="text-2xl">
+                  {mode === "login" ? "Welcome Back" : "Create Account"}
+                </CardTitle>
+                <CardDescription>
+                  {mode === "login"
+                    ? "Enter your details to access your dashboard."
+                    : "Start your mobility journey today."}
+                </CardDescription>
               </CardHeader>
+
               <form onSubmit={onSubmit}>
                 <CardContent className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="firstName">First name</Label>
-                      <Input
-                        id="firstName"
-                        placeholder="John"
-                        className="bg-white/50"
-                        value={firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
-                      />
+                  {mode === "register" && (
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="firstName">First name</Label>
+                        <Input
+                          id="firstName"
+                          placeholder="John"
+                          className="bg-white/50"
+                          value={firstName}
+                          onChange={(e) => setFirstName(e.target.value)}
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="lastName">Last name</Label>
+                        <Input
+                          id="lastName"
+                          placeholder="Smith"
+                          className="bg-white/50"
+                          value={lastName}
+                          onChange={(e) => setLastName(e.target.value)}
+                        />
+                      </div>
                     </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="lastName">Last name</Label>
-                      <Input
-                        id="lastName"
-                        placeholder="Smith"
-                        className="bg-white/50"
-                        value={lastName}
-                        onChange={(e) => setLastName(e.target.value)}
-                      />
-                    </div>
-                  </div>
+                  )}
+
                   <div className="space-y-2">
-                    <Label htmlFor="register-email">Email</Label>
+                    <Label htmlFor="auth-email">Email</Label>
                     <Input
-                      id="register-email"
+                      id="auth-email"
                       type="email"
                       placeholder="xyz@example.com"
                       required
@@ -119,60 +146,11 @@ export default function AuthPage() {
                       onChange={(e) => setEmail(e.target.value)}
                     />
                   </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="register-password">Password</Label>
-                    <Input
-                      id="register-password"
-                      type="password"
-                      required
-                      className="bg-white/50"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
-                  </div>
-                  {error && (
-                    <p className="text-sm text-red-600">
-                      {error}
-                    </p>
-                  )}
-                </CardContent>
-                <CardFooter>
-                  <Button
-                    type="submit"
-                    className="w-full bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/20"
-                    disabled={loading}
-                  >
-                    {loading ? "Creating account..." : "Create Account"}
-                  </Button>
-                </CardFooter>
-              </form>
-            </Card>
-          </TabsContent>
 
-          <TabsContent value="login">
-            <Card className="glass-card border-none shadow-xl">
-              <CardHeader>
-                <CardTitle>Welcome back!</CardTitle>
-                <CardDescription>Enter your login details to access your dashboard.</CardDescription>
-              </CardHeader>
-              <form onSubmit={onSubmit}>
-                <CardContent className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="login-email">Email</Label>
+                    <Label htmlFor="auth-password">Password</Label>
                     <Input
-                      id="login-email"
-                      type="email"
-                      placeholder="xyz@example.com"
-                      required
-                      className="bg-white/50"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="login-password">Password</Label>
-                    <Input
-                      id="login-password"
+                      id="auth-password"
                       type="password"
                       required
                       className="bg-white/50"
@@ -180,25 +158,40 @@ export default function AuthPage() {
                       onChange={(e) => setPassword(e.target.value)}
                     />
                   </div>
-                  {error && (
-                    <p className="text-sm text-red-600">
-                      {error}
-                    </p>
-                  )}
+
+                  {error && <p className="text-sm text-red-600">{error}</p>}
                 </CardContent>
-                <CardFooter>
+
+                <CardFooter className="flex flex-col gap-4">
                   <Button
                     type="submit"
-                    className="w-full bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/20"
+                    className="w-full h-11 text-base shadow-lg shadow-primary/25"
                     disabled={loading}
                   >
-                    {loading ? "Signing in..." : "Sign In"}
+                    {loading
+                      ? "Processing..."
+                      : mode === "login"
+                      ? "Sign In"
+                      : "Create Account"}
+                    {!loading && <ArrowRight className="ml-2 h-4 w-4" />}
                   </Button>
+
+                  <div className="text-sm text-center">
+                    <span className="text-muted-foreground">
+                      {mode === "login" ? "Don't have an account? " : "Already have an account? "}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => setMode(mode === "login" ? "register" : "login")}
+                      className="text-primary font-medium hover:underline"
+                    >
+                      {mode === "login" ? "Register" : "Login"}
+                    </button>
+                  </div>
                 </CardFooter>
               </form>
             </Card>
-          </TabsContent>
-        </Tabs>
+          </div>
         </div>
       </div>
     </div>
