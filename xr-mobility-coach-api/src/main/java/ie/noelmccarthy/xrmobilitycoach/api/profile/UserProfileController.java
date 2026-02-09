@@ -37,8 +37,10 @@ public class UserProfileController {
                                       @Valid @RequestBody UpsertUserProfileRequest req) {
         UUID userId = UUID.fromString(jwt.getSubject());
         int notesLength = req.notes() == null ? 0 : req.notes().length();
-        log.info("Profile upsert payload: userId= {} | preferredSessionLength= {} | trainingExperience= {} | targetAreas= {} | notesLength= {}",
+        log.info("Profile upsert payload: userId= {} | firstName {} | lastName{} | preferredSessionLength= {} | trainingExperience= {} | targetAreas= {} | notesLength= {}",
                 userId,
+                req.firstName(),
+                req.lastName(),
                 req.preferredSessionLength(),
                 req.trainingExperience(),
                 req.targetAreas(),
