@@ -152,6 +152,8 @@ export default function AuthPage() {
                     <Input
                       id="auth-password"
                       type="password"
+                      minLength={8}
+                      maxLength={72}
                       required
                       className="bg-white/50"
                       value={password}
