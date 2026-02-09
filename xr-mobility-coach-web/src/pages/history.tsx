@@ -1,9 +1,9 @@
-export default function RoutinesPage() {
+export default function HistoryPage() {
   return (
     <div>
-      <h1>Routines</h1>
+      <h1>History</h1>
       <p className="mt-2 text-sm text-muted-foreground">
-        Routines content will go here.
+        History content will go here.
       </p>
     </div>
   );
