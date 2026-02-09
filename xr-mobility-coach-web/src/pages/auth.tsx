@@ -24,7 +24,7 @@ type Mode = "login" | "register";
  * Includes tabs to switch between login and registration forms, and displays error messages on failure.
  */
 export default function AuthPage() {
-  const { login, register, user } = useAuth();
+  const { login, register, refreshProfile, user } = useAuth();
   const [, setLocation] = useLocation();
   const [mode, setMode] = useState<Mode>("register");
   const [firstName, setFirstName] = useState("");
@@ -46,7 +46,11 @@ export default function AuthPage() {
       } else {
         await register(email, password);
         if (firstName.trim() || lastName.trim()) {
-          await upsertProfile(firstName.trim(), lastName.trim());
+          await upsertProfile({
+            firstName: firstName.trim(),
+            lastName: lastName.trim(),
+          });
+          await refreshProfile();
         }
       }
       setLocation("/overview");
