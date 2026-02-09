@@ -1,4 +1,4 @@
-# XR Mobility Coach
+# XR Mobility Coach: An LLM-Powered System for Personalised Home Mobility Training
 
 **Final Year Project – BSc (Hons) Computer Science**  
 Technological University Dublin
@@ -6,18 +6,139 @@ Technological University Dublin
 **Author:** Noel McCarthy  
 **Academic Year:** 2025–2026
 
----
-
 ## Project Overview
 
-XR Mobility Coach is an extended reality (XR) rehabilitation and mobility coaching system.
-It consists of:
+XR Mobility Coach is a personalised mobility training platform designed to explore how structured software systems can deliver high-quality guided training without requiring constant in person coaching.
 
-- an XR client built with Godot and OpenXR
-- a web dashboard for user and routine management
-- a backend API implemented in Java Spring Boot
+Traditional coaching provides strong guidance but is often limited by cost, accessibility, and scheduling constraints. This project investigates how domain driven software design, conversational AI, and immersive interfaces can translate key elements of structured coaching into a scalable digital system.
 
-This repository contains all components of the system, structured as a multi-application workspace.
+Rather than replacing human expertise entirely, the goal is to translate structured coaching workflows into a platform that helps users:
+
+- build personalised training routines
+- understand exercises through clear guidance
+- track execution history and performance
+- interact with AI-assisted planning tools
+
+The system is designed around a multi client architecture where different interfaces support different stages of the training lifecycle.
+
+### Web Dashboard (React + TypeScript)
+
+The primary management interface where users:
+
+- configure their profile and training context
+- generate or edit routines using structured LLM workflows
+- review session history and performance analytics
+- manage exercise programming and progression
+
+The dashboard acts as the planning and analysis layer of the platform. I wanted the user to be able to access a dashboard where they can easily create a routine for themselves, by providing the LLM chat with context about their needs. This solves a common issue for users which is that they typically are unsure of what exercises to do for themselves, and by using a conversational agent, we can receive user context and help personalise a plan for them to follow. E.g., A runner struggles with their ankle mobility, however struggles to find exercises or a routine that fits their needs online. They can open this dashboard, tell the LLM the problem or wants, then receive a routine currated for them to follow and save.
+
+### XR Client (Godot + OpenXR)
+
+An immersive execution environment extending the platform into spatial interaction.
+
+The XR interface focuses on:
+
+- guided routine execution
+- multi-angle exercise demonstration
+- structured progression through exercises
+- recording session metrics for later analysis
+
+XR serves as an extension of the core platform, enabling the user to use an XR headset such as the Meta Quest to load their routines, and perform a mobility session. The session will have a 3D modelled exercise demo for them to follow along with, which will allow the user to observe the exercise from all angles, replay it, pause it etc. to understand it better. This is a signficant cognitive improvement on typical media driven demos, which are 2d or static. Studies have proven that spatial demonstrations improve exercise comphrension.
+
+### Backend API (Java Spring Boot)
+
+A stateless domain centric backend responsible for:
+
+- authentication and user identity
+- exercise catalogue management
+- routine lifecycle and validation
+- session recording and analytics
+- orchestration of AI-assisted routine generation
+
+A key architectural principle is the separation between:
+
+- **Exercise catalogue** — immutable reference data
+- **User routines** — structured, user-owned training workflows
+- **Sessions** — execution history and performance metrics
+
+This separation enables scalable feature development across multiple clients while maintaining clear domain boundaries.
+
+Large Language Models (LLMs) are used as an assistive tool for generating personalised routines based on user context and preferences. The AI does not control the system, suggestions are validated against the backend domain model before being persisted.
+
+This repository is structured as a monorepo containing the XR client, web dashboard, and backend API, allowing the different parts of the system to evolve together while sharing a consistent domain model and development workflow.
+
+## Architecture Overview
+
+XR Mobility Coach is built as a domain driven, multi client platform where all interfaces share a common backend domain model.
+
+Each client focuses on a specific phase of the user workflow:
+
+- Planning and analysis (Web Dashboard)
+- Execution and guided interaction (XR Client)
+
+Both consume the same stateless API layer, ensuring consistent behaviour regardless of interface.
+
+<div style="text-align: center;"><img src="images/high-level-architecture.png" alt="High level architecture" width="600" /></div>
+
+### Frontend Clients
+
+#### Web Dashboard
+
+- User onboarding and profile configuration
+- LLM assisted routine creation and editing
+- Session history and analytics visualisation
+
+#### XR Client
+
+- Guided execution of training sessions
+- Interactive exercise demonstrations
+- Local tracking of performance metrics
+- Submission of completed session data
+
+---
+
+### Backend Domain Services
+
+The backend acts as the orchestration layer for the entire system:
+
+- Stateless JWT-based authentication
+- User profile management
+- Exercise catalogue queries
+- Routine lifecycle management
+- Session recording and analytics capture
+- LLM orchestration using schema-constrained generation
+
+---
+
+### Data Layer
+
+PostgreSQL provides structured persistence for:
+
+- User identities and profiles
+- Exercise reference data
+- User defined routines
+- Historical session performance metrics
+
+---
+
+## Domain Model
+
+The system is designed around a shared domain model that defines how training concepts relate to one another. This model acts as the single source of truth across all clients and backend services.
+
+<div style="text-align: center;"><img src="images/Domain-Model.png" alt="domain model" width="600" /></div>
+
+Key entities include:
+
+- **User** — identity and ownership of routines and sessions
+- **UserProfile** — contextual data used for personalisation
+- **Exercise** — curated reference catalogue
+- **Routine** — structured training workflows
+- **RoutineExercise** — ordered exercise composition
+- **Session** — execution instance of a routine
+- **SessionExerciseMetric** — recorded performance data
+- **LLMRequest / LLMResponse** — conceptual modelling of AI-assisted generation
+
+Separating reference data, planning structures, and execution history enables scalable feature development while maintaining clear domain boundaries.
 
 ---
 
@@ -31,6 +152,75 @@ Below is each pull request summarised, seperated into the XR Client, Web Client,
 
 # Web Client: `xr-mobility-coach-web`
 
+## (PR#10): feature: create profile page to support get/put APIs, build app layout, header, and sidebar UI, with mobile support
+
+https://github.com/NQ-TU/xr-mobility-coach/pull/10
+
+In this PR we introduce the application layout and initial profile management flow for our web frontend.
+
+It establishes the core application 'shell' used across our authenticated routes (internal pages after auth), including a sidebar, header, and shared layout components. Mobile devices are supported with a 'hamburger' style dropdown for the sidebar.
+
+It also introduces the Profile page, enabling users to view and update their account and coaching preferences via the backend profile APIs.
+
+<div style="text-align: center;"><img src="images/pr10-profile-page.png" alt="mobile view profile page" width="600" /></div>
+<div style="text-align: center;"><img src="images/pr10-mobile.png" alt="mobile view profile page" width="600" /></div>
+
+#### Application Layout
+
+- `AppLayout` wrapper for authenticated routes
+- Persistent sidebar navigation (Overview, Routines, History, AI Coach, Profile)
+- Header with user identity display and global search
+- Consistent glass UI styling aligned with auth page
+
+#### Profile Page
+
+- New `/profile` route
+- Fetch user profile via `GET /api/profile/me`
+- Update profile via `PUT /api/profile/me`
+- Editable fields:
+  - First / Last name
+  - Training experience
+  - Preferred session length
+  - Target areas
+  - Notes
+
+- Live profile preview card showing user summary
+
+## (PR#9): Feature/web auth redesign
+
+https://github.com/NQ-TU/xr-mobility-coach/pull/9
+
+In this PR I redesigned the authentication page, from a single column login/register card to a two column design, alongside updating the background.
+
+I believe this gives the UI a more polished look, along with providing more user context. The background update also takes advantage of the 'frosted glass' design I am trying to achieve. The previous background was a gradient, which the frosted glass worked with but wasn't as obvious. I think this is a significant improvement.
+
+<div style="text-align: center;"><img src="images/web-dashboard-auth-page.png" alt="Web dashboard template" width="600" /></div>
+
+#### Notes
+
+- Updated backend `UserProfileController.java` logging to reflect new `user_profiles` columns.
+- Updated index.html to reflect frontend assets more consistently, specifically the logo and title.
+
+## (PR#8): feature: add auth flow & foundation (wouter, protected routes, api client), glass UI styling, profile upsert on register
+
+https://github.com/NQ-TU/xr-mobility-coach/pull/8
+
+Implements the initial authenticated web dashboard flow for XR Mobility Coach.
+
+Users can register/login via the Spring Boot API, the client stores the JWT, protects app routes, and redirects unauthenticated users to `/auth`. On registration, we also upsert the user's profile to persist first/last name.
+
+<div style="text-align: center;"><img src="images/pr8-auth-page.png" alt="Web dashboard template" width="600" /></div>
+
+#### Features Added
+
+- Auth page UI (Login / Register tabs)
+- Typed API client wrapper with `Authorization: Bearer <token>`
+- `AuthContext` provider (`login`, `register`, `logout`, `me`)
+- `ProtectedRoute` guard (redirects unauthenticated users to `/auth`)
+- Minimal protected page shell (`/overview`)
+- Profile upsert on register (`PUT /api/profile/me`) to store first/last name
+- Glass / gradient styling foundation (Tailwind)
+
 ## (PR#6): feature: scaffold XR Mobility Coach dashboard (Vite, React, TypeScript, Tailwind, Wouter)
 
 https://github.com/NQ-TU/xr-mobility-coach/pull/6
@@ -41,7 +231,7 @@ The frontend has been migrated from a static HTML/Bootstrap prototype to a moder
 
 `npm run dev`
 
-<img src="images/pr6_web_dashboard_first_iteration.png" alt="Web dashboard template" width="600" />
+<div style="text-align: center;"><img src="images/pr6_web_dashboard_first_iteration.png" alt="Web dashboard template" width="600" /></div>
 
 #### Tech Stack
 
@@ -68,6 +258,20 @@ The frontend has been migrated from a static HTML/Bootstrap prototype to a moder
 #### Tech Stack
 
 - Spring Boot 3.5.10 + Java 17 + JPA + Flyway + PostgreSQL, JWT via OAuth2 resource server.
+
+## (PR#7): Feature/update user_profiles with firstName & lastName to support frontend registration
+
+https://github.com/NQ-TU/xr-mobility-coach/pull/7
+
+This PR extends the user profile domain to support first and last name fields, enabling richer metadata and aligning the backend data model with frontend registration requirements.
+
+#### Features added
+
+- Added firstName and lastName to user profile table
+- Updated DTOs
+- Extended service layer to support
+- Flyway migration to add profile name columns
+  - Added missing flyway version file too
 
 ## (PR#5): feature: add session creation endpoint with per exercise metrics capturing for XR completed routines
 
