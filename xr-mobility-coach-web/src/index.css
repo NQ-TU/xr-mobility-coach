@@ -72,7 +72,7 @@
 
     body {
     @apply font-sans antialiased bg-background text-foreground;
-    background-image: url("src/assets/cyan_bg.jpg");
+    background-image: url("./assets/cyan_bg.jpg");
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
