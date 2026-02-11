@@ -71,7 +71,7 @@ export default function RoutineEditorPage() {
   }
 
   return (
-    <div className="max-w-6xl mx-auto h-[calc(100vh-8rem)] flex flex-col">
+    <div className="max-w-6xl mx-auto min-h-[calc(100vh-8rem)] lg:h-[calc(100vh-8rem)] flex flex-col">
       <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
         <div className="flex items-center gap-3">
           <Button
@@ -109,7 +109,7 @@ export default function RoutineEditorPage() {
         </div>
       </div>
 
-      <div className="flex-1 overflow-hidden">
+      <div className="flex-1 overflow-visible lg:overflow-hidden">
         {error ? (
           <Card className="glass-card border-none">
             <CardContent className="p-6 space-y-3">

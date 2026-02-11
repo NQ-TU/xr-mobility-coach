@@ -321,8 +321,8 @@ export const RoutineEditor = forwardRef<RoutineEditorHandle, RoutineEditorProps>
     }
 
     return (
-      <div className="flex flex-col lg:flex-row gap-6 h-full overflow-hidden">
-        <div className="flex-1 flex flex-col gap-4 bg-white/60 backdrop-blur-sm border border-white/30 rounded-2xl p-6 shadow-sm overflow-hidden">
+      <div className="flex flex-col lg:flex-row gap-6 lg:h-full lg:overflow-hidden">
+        <div className="flex-1 flex flex-col gap-4 bg-white/60 backdrop-blur-sm border border-white/30 rounded-2xl p-6 shadow-sm lg:overflow-hidden">
           <div className="space-y-4">
             <div className="space-y-2">
               <Label>Routine title</Label>
@@ -397,7 +397,7 @@ export const RoutineEditor = forwardRef<RoutineEditorHandle, RoutineEditorProps>
             </div>
           </div>
 
-          <div className="flex-1 flex flex-col overflow-hidden">
+          <div className="flex-1 flex flex-col lg:overflow-hidden">
             <div className="flex items-center justify-between py-2 border-b border-border/40 mb-2">
               <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
                 Sequence ({items.length})
@@ -405,7 +405,7 @@ export const RoutineEditor = forwardRef<RoutineEditorHandle, RoutineEditorProps>
               <span className="text-xs text-muted-foreground">Use arrows to reorder</span>
             </div>
 
-            <div className="flex-1 overflow-y-auto -mr-2 pr-2 space-y-3">
+            <div className="flex-1 space-y-3 lg:overflow-y-auto lg:-mr-2 lg:pr-2">
               {items.length === 0 ? (
                 <div className="h-40 flex flex-col items-center justify-center text-muted-foreground border-2 border-dashed border-border/50 rounded-xl bg-white/30">
                   <p>No exercises added yet.</p>
@@ -546,7 +546,7 @@ export const RoutineEditor = forwardRef<RoutineEditorHandle, RoutineEditorProps>
           )}
         </div>
 
-        <div className="w-full lg:w-1/3 flex flex-col gap-4 h-full overflow-hidden">
+        <div className="w-full lg:w-1/3 flex flex-col gap-4 lg:h-full lg:overflow-hidden">
           <div className="bg-white rounded-2xl shadow-sm border border-border/50 p-4 shrink-0 space-y-3">
             <Input
               placeholder="Search catalogue..."
@@ -584,7 +584,7 @@ export const RoutineEditor = forwardRef<RoutineEditorHandle, RoutineEditorProps>
             {searchError && <p className="text-sm text-red-600">{searchError}</p>}
           </div>
 
-          <div className="flex-1 bg-white rounded-2xl shadow-sm border border-border/50 p-4 overflow-hidden flex flex-col">
+          <div className="flex-1 bg-white rounded-2xl shadow-sm border border-border/50 p-4 lg:overflow-hidden flex flex-col">
             <div className="flex items-center justify-between mb-3">
               <p className="text-sm font-semibold">Exercise catalogue</p>
               <span className="text-xs text-muted-foreground">
@@ -592,7 +592,7 @@ export const RoutineEditor = forwardRef<RoutineEditorHandle, RoutineEditorProps>
               </span>
             </div>
 
-            <div className="flex-1 overflow-y-auto -mr-2 pr-2 space-y-3">
+            <div className="flex-1 space-y-3 lg:overflow-y-auto lg:-mr-2 lg:pr-2">
               {searchLoading ? (
                 <p className="text-sm text-muted-foreground">Searching exercises...</p>
               ) : searchResults.length === 0 ? (
