@@ -3,6 +3,7 @@ import { Redirect, Route, Switch } from "wouter";
 import AuthPage from "@/pages/auth";
 import OverviewPage from "@/pages/overview";
 import RoutinesPage from "@/pages/routines";
+import RoutineEditorPage from "@/pages/routine-editor";
 import HistoryPage from "@/pages/history";
 import CoachPage from "@/pages/coach";
 import ProfilePage from "@/pages/profile";
@@ -17,6 +18,20 @@ export default function App() {
         <ProtectedRoute>
           <AppLayout>
             <OverviewPage />
+          </AppLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/routines/new">
+        <ProtectedRoute>
+          <AppLayout>
+            <RoutineEditorPage />
+          </AppLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/routines/:id/edit">
+        <ProtectedRoute>
+          <AppLayout>
+            <RoutineEditorPage />
           </AppLayout>
         </ProtectedRoute>
       </Route>
