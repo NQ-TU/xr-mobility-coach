@@ -5,8 +5,11 @@ import ie.noelmccarthy.xrmobilitycoach.api.exercise.ExerciseRepository;
 import ie.noelmccarthy.xrmobilitycoach.api.routine.Routine;
 import ie.noelmccarthy.xrmobilitycoach.api.routine.RoutineRepository;
 import ie.noelmccarthy.xrmobilitycoach.api.sessions.dto.CreateSessionRequest;
+import ie.noelmccarthy.xrmobilitycoach.api.sessions.dto.SessionDetailResponse;
 import ie.noelmccarthy.xrmobilitycoach.api.sessions.dto.SessionMetricRequest;
+import ie.noelmccarthy.xrmobilitycoach.api.sessions.dto.SessionMetricResponse;
 import ie.noelmccarthy.xrmobilitycoach.api.sessions.dto.SessionResponse;
+import ie.noelmccarthy.xrmobilitycoach.api.sessions.dto.SessionSummaryResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -15,6 +18,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneOffset;
+import java.time.Duration;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -77,6 +83,65 @@ public class SessionService {
         );
     }
 
+    @Transactional(readOnly = true)
+    public List<SessionSummaryResponse> list(UUID userId, LocalDate from, LocalDate to) {
+        if (to.isBefore(from)) {
+            throw new ResponseStatusException(BAD_REQUEST, "to date cannot be before from date");
+        }
+
+        Instant fromStart = from.atStartOfDay(ZoneOffset.UTC).toInstant();
+        Instant toExclusive = to.plusDays(1).atStartOfDay(ZoneOffset.UTC).toInstant();
+
+        List<Session> sessionsInRange = sessions.findByUserIdAndEndedAtRange(userId, fromStart, toExclusive);
+        List<UUID> sessionIds = sessionsInRange.stream().map(Session::getId).toList();
+
+        Map<UUID, Long> exerciseCounts = sessionIds.isEmpty()
+                ? Map.of()
+                : metrics.countDistinctExercisesBySessionIds(sessionIds).stream()
+                    .collect(Collectors.toMap(SessionExerciseMetricRepository.SessionExerciseCount::getSessionId,
+                            SessionExerciseMetricRepository.SessionExerciseCount::getExerciseCount));
+
+        Map<UUID, Routine> routineMap = sessionsInRange.stream()
+                .map(Session::getRoutineId)
+                .filter(Objects::nonNull)
+                .distinct()
+                .collect(Collectors.collectingAndThen(Collectors.toList(), routines::findAllById))
+                .stream()
+                .collect(Collectors.toMap(Routine::getId, routine -> routine));
+
+        return sessionsInRange.stream()
+                .map(session -> toSummary(session, routineMap.get(session.getRoutineId()),
+                        exerciseCounts.getOrDefault(session.getId(), 0L)))
+                .toList();
+    }
+
+    @Transactional(readOnly = true)
+    public SessionDetailResponse get(UUID userId, UUID sessionId) {
+        Session session = sessions.findByIdAndUserId(sessionId, userId)
+                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Session not found"));
+
+        Routine routine = session.getRoutineId() == null ? null :
+                routines.findById(session.getRoutineId()).orElse(null);
+
+        List<SessionExerciseMetric> detail = metrics.findDetailedBySessionId(session.getId());
+        List<SessionMetricResponse> metricResponses = detail.stream()
+                .map(SessionService::toMetricResponse)
+                .toList();
+
+        long durationSeconds = Duration.between(session.getStartedAt(), session.getEndedAt()).getSeconds();
+        return new SessionDetailResponse(
+                session.getId(),
+                session.getRoutineId(),
+                routine == null ? null : routine.getTitle(),
+                routine == null ? null : routine.getTargetArea(),
+                session.getStartedAt(),
+                session.getEndedAt(),
+                durationSeconds,
+                session.getOverallRpe(),
+                metricResponses
+        );
+    }
+
     private List<SessionExerciseMetric> buildMetrics(UUID sessionId, List<SessionMetricRequest> metricRequests) {
         if (metricRequests == null || metricRequests.isEmpty()) {
             throw new ResponseStatusException(BAD_REQUEST, "Session requires at least one exercise metric");
@@ -134,5 +199,36 @@ public class SessionService {
         }
         String trimmed = value.trim();
         return trimmed.isEmpty() ? null : trimmed;
+    }
+
+    private static SessionSummaryResponse toSummary(Session session, Routine routine, long exerciseCount) {
+        long durationSeconds = Duration.between(session.getStartedAt(), session.getEndedAt()).getSeconds();
+        return new SessionSummaryResponse(
+                session.getId(),
+                session.getRoutineId(),
+                routine == null ? null : routine.getTitle(),
+                routine == null ? null : routine.getTargetArea(),
+                session.getStartedAt(),
+                session.getEndedAt(),
+                durationSeconds,
+                session.getOverallRpe(),
+                exerciseCount
+        );
+    }
+
+    private static SessionMetricResponse toMetricResponse(SessionExerciseMetric metric) {
+        Exercise exercise = metric.getExercise();
+        return new SessionMetricResponse(
+                exercise.getId(),
+                exercise.getName(),
+                exercise.getMuscleGroup(),
+                metric.getSetIndex(),
+                metric.getCompleted(),
+                metric.getSkipped(),
+                metric.getRepsCompleted(),
+                metric.getTimeUnderTension(),
+                metric.getExerciseRpe(),
+                metric.getNotes()
+        );
     }
 }
