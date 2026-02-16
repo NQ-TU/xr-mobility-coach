@@ -14,6 +14,7 @@ function formatExerciseCount(count: number) {
 }
 
 function getSelectedFromLocation(location: string) {
+  // Supports deep-linking back to a specific routine (e.g. after save/edit).
   const query = location.split("?")[1];
   if (!query) return null;
   const params = new URLSearchParams(query);
@@ -58,6 +59,7 @@ export default function RoutinesPage() {
         });
         setRoutines(data.content);
         setPageInfo(data);
+        // Selection precedence: keep current selection, then query param, then first item.
         setSelectedId((current) =>
           current ?? selectedFromQuery ?? data.content[0]?.id ?? null,
         );
@@ -75,12 +77,14 @@ export default function RoutinesPage() {
   }, [listPage, loadRoutines]);
 
   useEffect(() => {
+    // Sync selection when a `?selected=<id>` query param is pushed to this route.
     if (selectedFromQuery) {
       setSelectedId(selectedFromQuery);
     }
   }, [selectedFromQuery]);
 
   useEffect(() => {
+    // Guard against setting state from a stale request when selection changes quickly.
     let active = true;
 
     if (!selectedId) {
