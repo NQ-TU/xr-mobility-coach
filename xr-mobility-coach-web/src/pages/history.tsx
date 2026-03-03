@@ -289,9 +289,47 @@ export default function HistoryPage() {
     sessions: SessionSummary[];
     error: string | null;
   } | null>(null);
+  const leftColumnRef = useRef<HTMLDivElement | null>(null);
+  const [sessionsPanelHeight, setSessionsPanelHeight] = useState<number | null>(null);
   const selectedDayKeyRef = useRef(selectedDayKey);
   // Carries a clicked heatmap day across month switches so selection can be restored after fetch.
   const pendingFocusDayKeyRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    const leftColumnEl = leftColumnRef.current;
+    if (!leftColumnEl) return;
+
+    let frameId: number | null = null;
+    const syncSessionsPanelHeight = () => {
+      if (!window.matchMedia("(min-width: 1024px)").matches) {
+        setSessionsPanelHeight(null);
+        return;
+      }
+
+      if (frameId) {
+        window.cancelAnimationFrame(frameId);
+      }
+
+      frameId = window.requestAnimationFrame(() => {
+        const nextHeight = Math.round(leftColumnEl.getBoundingClientRect().height);
+        setSessionsPanelHeight((prev) => (prev === nextHeight ? prev : nextHeight));
+      });
+    };
+
+    syncSessionsPanelHeight();
+
+    const resizeObserver = new ResizeObserver(syncSessionsPanelHeight);
+    resizeObserver.observe(leftColumnEl);
+    window.addEventListener("resize", syncSessionsPanelHeight);
+
+    return () => {
+      window.removeEventListener("resize", syncSessionsPanelHeight);
+      resizeObserver.disconnect();
+      if (frameId) {
+        window.cancelAnimationFrame(frameId);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     selectedDayKeyRef.current = selectedDayKey;
@@ -541,7 +579,7 @@ export default function HistoryPage() {
       </div>
 
       <div className="grid items-start gap-6 lg:grid-cols-[340px_1fr]">
-        <div className="order-2 space-y-4 lg:order-1">
+        <div ref={leftColumnRef} className="order-2 space-y-4 lg:order-1">
           <div className="rounded-3xl border border-white/40 bg-white/80 p-4 shadow-lg backdrop-blur-xl">
             <div className="mb-4 flex items-center justify-between gap-2">
               <Button
@@ -754,7 +792,10 @@ export default function HistoryPage() {
           </div>
         </div>
 
-        <div className="order-1 rounded-3xl border border-white/40 bg-white/80 p-5 shadow-lg backdrop-blur-xl flex h-full min-h-0 flex-col lg:order-2">
+        <div
+          className="order-1 rounded-3xl border border-white/40 bg-white/80 p-5 shadow-lg backdrop-blur-xl flex min-h-0 flex-col lg:order-2"
+          style={sessionsPanelHeight ? { height: `${sessionsPanelHeight}px` } : undefined}
+        >
           <div className="flex flex-wrap items-center justify-between gap-3">
             <h2 className="text-2xl font-display font-semibold">Sessions</h2>
             <div className="flex items-center gap-2 text-xs text-muted-foreground">
@@ -786,7 +827,7 @@ export default function HistoryPage() {
             </div>
           )}
 
-          <div className="mt-4 flex-1 overflow-y-auto pr-2 space-y-6">
+          <div className="mt-4 min-h-0 flex-1 space-y-6 overflow-y-auto pr-2">
             {sessionGroups.map((group) => (
               <section key={group.dayKey} className="space-y-3">
                 <div
