@@ -163,7 +163,7 @@ export default function ProfilePage() {
                       </span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-muted-foreground">Session length</span>
+                      <span className="text-muted-foreground">Daily goal</span>
                       <span className="font-medium">
                         {profile?.preferredSessionLength ? `${profile.preferredSessionLength} min` : "Not set"}
                       </span>
@@ -271,7 +271,7 @@ export default function ProfilePage() {
                         </select>
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="profile-session-length">Preferred session length (min)</Label>
+                        <Label htmlFor="profile-session-length">Daily session goal (min)</Label>
                         <Input
                           id="profile-session-length"
                           type="number"
