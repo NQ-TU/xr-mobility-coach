@@ -19,7 +19,9 @@ application-dev.yml
 # Godot (GDScript / XR)
 .godot/
 .import/
+# Keep export presets, to preserve export settings across machines, but ignore the generated export files.
 export_presets.cfg
+!xr-mobility-coach-headset/export_presets.cfg
 *.translation
 *.tmp
 .nomedia
