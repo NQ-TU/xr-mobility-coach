@@ -1,0 +1,10 @@
+.git
+.gitignore
+.idea
+target
+API.md
+HELP.md
+APP_RUNNER.md
+compose.yml
+src/main/resources/application-local.properties
+.vscode
