@@ -19,26 +19,29 @@ export default function RoutineEditorPage() {
   const routineId = matchEdit ? editParams?.id : null;
 
   const [routine, setRoutine] = useState<RoutineDetail | null>(null);
+  const [loadedRoutineId, setLoadedRoutineId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
   const editorRef = useRef<RoutineEditorHandle | null>(null);
 
   useEffect(() => {
     if (mode !== "edit" || !routineId) {
-      setRoutine(null);
-      setError(null);
       return;
     }
 
     let active = true;
-    setError(null);
 
     getRoutine(routineId)
       .then((data) => {
-        if (active) setRoutine(data);
+        if (active) {
+          setLoadedRoutineId(routineId);
+          setRoutine(data);
+          setError(null);
+        }
       })
       .catch((err) => {
         if (active) {
+          setLoadedRoutineId(routineId);
           setRoutine(null);
           setError(err instanceof Error ? err.message : "Failed to load routine.");
         }
@@ -48,6 +51,11 @@ export default function RoutineEditorPage() {
       active = false;
     };
   }, [mode, routineId]);
+
+  const routineForEditor =
+    mode === "edit" && loadedRoutineId === routineId ? routine : null;
+  const pageError =
+    mode === "edit" && loadedRoutineId === routineId ? error : null;
 
   const handleCancel = () => {
     setLocation("/routines");
@@ -110,24 +118,24 @@ export default function RoutineEditorPage() {
       </div>
 
       <div className="flex-1 overflow-visible lg:overflow-hidden">
-        {error ? (
+        {pageError ? (
           <Card className="glass-card border-none">
             <CardContent className="p-6 space-y-3">
-              <p className="text-sm text-red-600">{error}</p>
+              <p className="text-sm text-red-600">{pageError}</p>
               <Button type="button" onClick={handleCancel}>
                 Return to routines
               </Button>
             </CardContent>
           </Card>
         ) : (
-          <RoutineEditor
-            ref={editorRef}
-            mode={mode}
-            initialRoutine={routine}
-            onCancel={handleCancel}
-            onSave={handleSave}
-            onSavingChange={setSaving}
-            showFooterActions={false}
+            <RoutineEditor
+              ref={editorRef}
+              mode={mode}
+              initialRoutine={routineForEditor}
+              onCancel={handleCancel}
+              onSave={handleSave}
+              onSavingChange={setSaving}
+              showFooterActions={false}
           />
         )}
       </div>

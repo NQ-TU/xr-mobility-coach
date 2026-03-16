@@ -8,7 +8,7 @@ import {
   UserCircle,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "@/context/auth-context";
 
 const NAV_ITEMS = [
   { label: "Overview", icon: LayoutDashboard, href: "/overview" },

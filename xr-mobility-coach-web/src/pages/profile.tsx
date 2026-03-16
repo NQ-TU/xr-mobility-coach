@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/card";
 import { upsertProfile } from "@/lib/profile";
 import type { UpsertProfileRequest, UserProfile } from "@/lib/profile";
-import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "@/context/auth-context";
 
 const TARGET_AREAS = ["Spine", "Hips", "Shoulders", "Wrists", "Ankles"];
 const EXPERIENCE_OPTIONS: Array<NonNullable<UserProfile["trainingExperience"]>> = [

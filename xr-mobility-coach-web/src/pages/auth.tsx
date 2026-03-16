@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Dumbbell, ArrowRight, Sparkles } from "lucide-react";
-import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "@/context/auth-context";
 import { upsertProfile } from "@/lib/profile";
 
 type Mode = "login" | "register";

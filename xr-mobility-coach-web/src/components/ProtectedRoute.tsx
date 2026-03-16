@@ -1,5 +1,5 @@
 import { Redirect } from "wouter";
-import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "@/context/auth-context";
 
 // A wrapper component for protected routes. It checks if the user is authenticated and either renders the child components,
 //  shows a loading state, or redirects to the auth page.
