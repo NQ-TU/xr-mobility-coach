@@ -1,29 +1,18 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import type { ReactNode } from "react";
 import { login, register, me, logout } from "@/lib/auth";
 import type { AuthUser } from "@/lib/auth";
 import { getProfile } from "@/lib/profile";
 import type { UserProfile } from "@/lib/profile";
 import { getToken } from "@/lib/api";
-
-type AuthContextValue = {
-  user: AuthUser | null;
-  profile: UserProfile | null;
-  loading: boolean;
-  login: (email: string, password: string) => Promise<void>;
-  register: (email: string, password: string) => Promise<void>;
-  refreshProfile: () => Promise<void>;
-  logout: () => void;
-};
-
-const AuthContext = createContext<AuthContextValue | null>(null);
+import { AuthContext, type AuthContextValue } from "@/context/auth-context";
 
 // Provides authentication context to the app, managing user state, loading state, and auth functions for login, registration, and logout. 
 // On mount, it checks for an existing token and fetches user info if present.
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<AuthUser | null>(null);
   const [profile, setProfile] = useState<UserProfile | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(() => Boolean(getToken()));
 
   const refreshProfile = useCallback(async () => {
     try {
@@ -37,8 +26,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const token = getToken();
     if (!token) {
-      setLoading(false);
-      setProfile(null);
       return;
     }
     me()
@@ -79,11 +66,4 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
-}
-
-// Custom hook to access authentication context. Ensures it is used within an AuthProvider and provides user info, loading state, and auth functions.
-export function useAuth() {
-  const ctx = useContext(AuthContext);
-  if (!ctx) throw new Error("useAuth must be used within AuthProvider");
-  return ctx;
 }

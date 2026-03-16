@@ -1,6 +1,6 @@
 import { Menu } from "lucide-react";
 import { useLocation } from "wouter";
-import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "@/context/auth-context";
 
 // Helper function to generate user initials for display in the header. It uses first name, last name, or email to create a 1-2 character initials string.
 function getUserInitials(firstName?: string | null, lastName?: string | null, email?: string | null) {

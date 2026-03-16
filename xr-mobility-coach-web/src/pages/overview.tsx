@@ -13,11 +13,12 @@ import {
   TrendingUp,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "@/context/auth-context";
 import { listRoutines } from "@/lib/routines";
 import { getSessionDetail, listSessions, type SessionDetail, type SessionSummary } from "@/lib/sessions";
 import { cn } from "@/lib/utils";
 
+// Constants defining the lookback period for data analysis, trend visualization, and consistency milestones.
 const LOOKBACK_DAYS = 120;
 const TREND_DAYS = 7;
 const FAVORITE_ROUTINE_DAYS = 28;

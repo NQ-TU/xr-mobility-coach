@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useImperativeHandle, useMemo, useState } from "react";
+import { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useState } from "react";
 import { Target, Timer } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -194,7 +194,7 @@ export const RoutineEditor = forwardRef<RoutineEditorHandle, RoutineEditorProps>
     };
 
     // Function to perform a search for exercises based on the current search query and selected muscle group, updating the search results and pagination state accordingly.
-    const handleSearch = async (page = 0) => {
+    const handleSearch = useCallback(async (page = 0) => {
       setSearchLoading(true);
       setSearchError(null);
       try {
@@ -213,11 +213,11 @@ export const RoutineEditor = forwardRef<RoutineEditorHandle, RoutineEditorProps>
       } finally {
         setSearchLoading(false);
       }
-    };
+    }, [searchMuscleGroup, searchQuery]);
 
     useEffect(() => {
       handleSearch(0);
-    }, []);
+    }, [handleSearch]);
 
     // Function to add an exercise to the routine items list when selected from the search results, initializing it with default sets and reps/hold time.
     const addExercise = (exercise: ExerciseSummary) => {

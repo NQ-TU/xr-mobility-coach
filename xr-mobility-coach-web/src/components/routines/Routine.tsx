@@ -47,7 +47,6 @@ export function RoutineCard({
     let active = true;
 
     if (routineExerciseIds.length === 0) {
-      setExerciseDetails({});
       return () => {
         active = false;
       };
