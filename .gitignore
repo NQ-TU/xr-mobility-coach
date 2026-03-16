@@ -16,6 +16,21 @@ application-local.yml
 application-dev.properties
 application-dev.yml
 
+# Environment / secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.jks
+*.keystore
+*.crt
+*.csr
+.aws/
+terraform.tfstate*
+*.tfvars
+
 # Godot (GDScript / XR)
 .godot/
 .import/
@@ -66,3 +81,7 @@ dist-ssr
 
 **/.vite
 **/coverage
+
+# Private deployment / ops notes
+xr-mobility-coach-api/APP_RUNNER.md
+xr-mobility-coach-api/API.md

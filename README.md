@@ -146,6 +146,82 @@ Separating reference data, planning structures, and execution history enables sc
 
 This project is under active development. See change logs below.
 
+## Local Setup
+
+This repository contains three main application areas:
+
+- `xr-mobility-coach-api` - Spring Boot backend
+- `xr-mobility-coach-web` - React + Vite web dashboard
+- `xr-mobility-coach-headset` - Godot XR client
+
+### Prerequisites
+
+- Java 17
+- Node.js 20+
+- npm
+- Docker Desktop
+- Godot 4.x
+
+### 1. Start the local database
+
+From the repository root:
+
+```bash
+docker compose -f infra/docker-compose.yml up -d
+```
+
+This starts the local PostgreSQL development database used by the backend.
+
+### 2. Run the backend
+
+The backend lives in `xr-mobility-coach-api`.
+
+Use a local Spring profile and provide local-only config values outside of version control.
+
+Local development expects:
+
+- PostgreSQL at `localhost:5433`
+- a local JWT secret
+- CORS allowed for `http://localhost:5173`
+
+Run the API with the `local` profile enabled.
+
+Linux / macOS:
+
+```bash
+cd xr-mobility-coach-api
+./mvnw spring-boot:run -Dspring-boot.run.profiles=local
+```
+
+Windows PowerShell:
+
+```powershell
+cd xr-mobility-coach-api
+.\mvnw.cmd spring-boot:run "-Dspring-boot.run.profiles=local"
+```
+
+The backend runs on `http://localhost:8080`.
+
+### 3. Run the web dashboard
+
+The frontend lives in `xr-mobility-coach-web`.
+
+```bash
+cd xr-mobility-coach-web
+npm install
+npm run dev
+```
+
+The dashboard runs on `http://localhost:5173`.
+
+During local development, `/api` requests are proxied to the Spring Boot backend.
+
+### 4. Run the XR client
+
+Open `xr-mobility-coach-headset` in Godot and run the project from the editor.
+
+The headset client is still under active development and may require local device-specific XR configuration depending on your setup.
+
 # Change logs
 
 Below is each pull request summarised, seperated into the XR Client, Web Client, and Backend Client changes.
