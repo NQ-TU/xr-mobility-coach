@@ -82,6 +82,7 @@ dist-ssr
 **/.vite
 **/coverage
 
-# Private deployment / ops notes
+# Private deployment notes for reporting and infrastructure, not relevant to the public codebase
 xr-mobility-coach-api/APP_RUNNER.md
 xr-mobility-coach-api/API.md
+INFRASTRUCTURE.md
