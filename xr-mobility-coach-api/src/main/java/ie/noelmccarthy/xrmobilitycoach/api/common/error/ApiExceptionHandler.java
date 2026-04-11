@@ -2,8 +2,10 @@ package ie.noelmccarthy.xrmobilitycoach.api.common.error;
 
 import ie.noelmccarthy.xrmobilitycoach.api.auth.EmailAlreadyInUseException;
 import ie.noelmccarthy.xrmobilitycoach.api.auth.InvalidCredentialsException;
+import ie.noelmccarthy.xrmobilitycoach.api.ratelimit.RateLimitExceededException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -34,5 +36,14 @@ public class ApiExceptionHandler {
     public ErrorResponse invalidCreds() {
         log.warn("Login failed: invalid credentials");
         return new ErrorResponse("INVALID_CREDENTIALS", "Invalid email or password", Instant.now());
+    }
+
+    @ExceptionHandler(RateLimitExceededException.class)
+    /** Return 429 when an application rate limit is exceeded. */
+    public ResponseEntity<ErrorResponse> rateLimited(RateLimitExceededException ex) {
+        log.warn("Rate limit exceeded: {}", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS)
+                .header("Retry-After", Long.toString(ex.getRetryAfterSeconds()))
+                .body(new ErrorResponse("RATE_LIMITED", ex.getMessage(), Instant.now()));
     }
 }
