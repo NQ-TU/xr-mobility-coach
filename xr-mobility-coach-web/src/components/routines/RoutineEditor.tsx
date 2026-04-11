@@ -153,10 +153,10 @@ export const RoutineEditor = forwardRef<RoutineEditorHandle, RoutineEditorProps>
     const [searchPage, setSearchPage] = useState(0);
     const [searchTotalPages, setSearchTotalPages] = useState(0);
 
-    // When the component mounts or when the mode or initial routine changes, initialize the editor state. If in edit mode with a provided routine,
-    //  populate the title and items based on the routine details. If in create mode, reset to empty values.
+    // When the component mounts or when the mode or initial routine changes, initialize the editor state. If a routine like
+    // payload is provided, populate the editor from it so create mode can also preload AI-generated drafts.
     useEffect(() => {
-      if (mode === "edit" && initialRoutine) {
+      if (initialRoutine) {
         setTitle(initialRoutine.title ?? "");
         setItems(buildInitialItems(initialRoutine));
         setError(null);

@@ -3,8 +3,32 @@ import { useLocation, useRoute } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { RoutineEditor, type RoutineEditorHandle } from "@/components/routines/RoutineEditor";
+import {
+  ROUTINE_EDITOR_DRAFT_STORAGE_KEY,
+  type RoutineDraftResponse,
+} from "@/lib/coach";
 import { createRoutine, getRoutine, updateRoutine } from "@/lib/routines";
 import type { RoutineDetail, UpsertRoutinePayload } from "@/lib/routines";
+
+function mapRoutineDraftToRoutineDetail(draft: RoutineDraftResponse): RoutineDetail {
+  return {
+    id: "draft",
+    title: draft.title,
+    targetArea: draft.targetArea,
+    estimatedDuration: draft.estimatedDuration,
+    createdAt: null,
+    items: draft.items.map((item) => ({
+      exerciseId: item.exerciseId,
+      exerciseName: item.exerciseName,
+      muscleGroup: item.muscleGroup,
+      sequenceIndex: item.sequenceIndex,
+      sets: item.sets,
+      repsOrHoldSeconds: item.repsOrHoldSeconds,
+      tempo: null,
+      coachingNotes: item.notes ?? null,
+    })),
+  };
+}
 
 export default function RoutineEditorPage() {
   const [, setLocation] = useLocation();
@@ -19,10 +43,41 @@ export default function RoutineEditorPage() {
   const routineId = matchEdit ? editParams?.id : null;
 
   const [routine, setRoutine] = useState<RoutineDetail | null>(null);
+  const [draftRoutine, setDraftRoutine] = useState<RoutineDetail | null>(null);
   const [loadedRoutineId, setLoadedRoutineId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
   const editorRef = useRef<RoutineEditorHandle | null>(null);
+  const hasHydratedCreateDraftRef = useRef(false);
+
+  useEffect(() => {
+    if (mode !== "create") {
+      setDraftRoutine(null);
+      hasHydratedCreateDraftRef.current = false;
+      return;
+    }
+
+    if (hasHydratedCreateDraftRef.current) {
+      return;
+    }
+
+    hasHydratedCreateDraftRef.current = true;
+
+    const rawDraft = sessionStorage.getItem(ROUTINE_EDITOR_DRAFT_STORAGE_KEY);
+    if (!rawDraft) {
+      setDraftRoutine(null);
+      return;
+    }
+
+    try {
+      const parsedDraft = JSON.parse(rawDraft) as RoutineDraftResponse;
+      setDraftRoutine(mapRoutineDraftToRoutineDetail(parsedDraft));
+    } catch {
+      setDraftRoutine(null);
+    } finally {
+      sessionStorage.removeItem(ROUTINE_EDITOR_DRAFT_STORAGE_KEY);
+    }
+  }, [mode]);
 
   useEffect(() => {
     if (mode !== "edit" || !routineId) {
@@ -53,7 +108,7 @@ export default function RoutineEditorPage() {
   }, [mode, routineId]);
 
   const routineForEditor =
-    mode === "edit" && loadedRoutineId === routineId ? routine : null;
+    mode === "edit" && loadedRoutineId === routineId ? routine : draftRoutine;
   const pageError =
     mode === "edit" && loadedRoutineId === routineId ? error : null;
 
