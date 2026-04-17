@@ -1,0 +1,168 @@
+[gd_scene format=3 uid="uid://bpsmtpyndbb3"]
+
+[ext_resource type="Script" uid="uid://getsd6a4wjwn" path="res://ui/coach_select_panel.gd" id="1_panel"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_header"]
+bg_color = Color(0.980392, 0.996078, 1, 0.7)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 0.44)
+corner_radius_top_left = 28
+corner_radius_top_right = 28
+corner_radius_bottom_right = 28
+corner_radius_bottom_left = 28
+shadow_color = Color(0.0509804, 0.168627, 0.223529, 0.08)
+shadow_size = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_logout"]
+bg_color = Color(0.980392, 0.996078, 1, 0.86)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 0.44)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0.0509804, 0.168627, 0.223529, 0.08)
+shadow_size = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bottom"]
+bg_color = Color(0.980392, 0.996078, 1, 0.78)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 0.44)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+shadow_color = Color(0.0509804, 0.168627, 0.223529, 0.12)
+shadow_size = 12
+
+[node name="CoachSelectPanel" type="Control" unique_id=280591225]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_panel")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=753627213]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 84
+theme_override_constants/margin_top = 48
+theme_override_constants/margin_right = 84
+theme_override_constants/margin_bottom = 54
+
+[node name="RootColumn" type="VBoxContainer" parent="MarginContainer" unique_id=182839792]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 24
+
+[node name="HeaderRow" type="HBoxContainer" parent="MarginContainer/RootColumn" unique_id=801106459]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="HeaderCard" type="PanelContainer" parent="MarginContainer/RootColumn/HeaderRow" unique_id=578829461]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_header")
+
+[node name="HeaderMargin" type="MarginContainer" parent="MarginContainer/RootColumn/HeaderRow/HeaderCard" unique_id=1708868970]
+layout_mode = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 24
+
+[node name="HeaderColumn" type="VBoxContainer" parent="MarginContainer/RootColumn/HeaderRow/HeaderCard/HeaderMargin" unique_id=434981265]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Eyebrow" type="Label" parent="MarginContainer/RootColumn/HeaderRow/HeaderCard/HeaderMargin/HeaderColumn" unique_id=969148176]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.341176, 0.372549, 0.94902, 1)
+theme_override_font_sizes/font_size = 18
+text = "Coach Selection"
+
+[node name="Title" type="Label" parent="MarginContainer/RootColumn/HeaderRow/HeaderCard/HeaderMargin/HeaderColumn" unique_id=803122074]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0823529, 0.129412, 0.207843, 1)
+theme_override_font_sizes/font_size = 42
+text = "Choose your coach!"
+autowrap_mode = 3
+
+[node name="Subtitle" type="Label" parent="MarginContainer/RootColumn/HeaderRow/HeaderCard/HeaderMargin/HeaderColumn" unique_id=582181454]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.25, 0.33, 0.45, 1)
+theme_override_font_sizes/font_size = 18
+text = "Each coach is standing on a pedestal in front of you. Pick the one you want to guide your sessions."
+autowrap_mode = 3
+
+[node name="UserLabel" type="Label" parent="MarginContainer/RootColumn/HeaderRow" unique_id=737592659]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.25, 0.33, 0.45, 1)
+theme_override_font_sizes/font_size = 16
+text = "Signed in as guest"
+vertical_alignment = 1
+
+[node name="LogoutButton" type="Button" parent="MarginContainer/RootColumn/HeaderRow" unique_id=1734317755]
+custom_minimum_size = Vector2(120, 64)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.25, 0.33, 0.45, 1)
+theme_override_colors/font_pressed_color = Color(0.25, 0.33, 0.45, 1)
+theme_override_colors/font_hover_color = Color(0.25, 0.33, 0.45, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_logout")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_logout")
+theme_override_styles/hover = SubResource("StyleBoxFlat_logout")
+theme_override_styles/focus = SubResource("StyleBoxFlat_logout")
+text = "Log Out"
+
+[node name="Spacer" type="Control" parent="MarginContainer/RootColumn" unique_id=110738618]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BottomCard" type="PanelContainer" parent="MarginContainer/RootColumn" unique_id=1389559564]
+custom_minimum_size = Vector2(0, 270)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bottom")
+
+[node name="BottomMargin" type="MarginContainer" parent="MarginContainer/RootColumn/BottomCard" unique_id=1162990934]
+layout_mode = 2
+theme_override_constants/margin_left = 26
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 26
+theme_override_constants/margin_bottom = 24
+
+[node name="BottomColumn" type="VBoxContainer" parent="MarginContainer/RootColumn/BottomCard/BottomMargin" unique_id=1551742475]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="SelectionLabel" type="Label" parent="MarginContainer/RootColumn/BottomCard/BottomMargin/BottomColumn" unique_id=853454291]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0823529, 0.129412, 0.207843, 1)
+theme_override_font_sizes/font_size = 26
+text = "Available Coaches"
+
+[node name="CoachGrid" type="GridContainer" parent="MarginContainer/RootColumn/BottomCard/BottomMargin/BottomColumn" unique_id=1491901121]
+layout_mode = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+columns = 4
+
+[node name="StatusLabel" type="Label" parent="MarginContainer/RootColumn/BottomCard/BottomMargin/BottomColumn" unique_id=856123682]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.25, 0.33, 0.45, 1)
+theme_override_font_sizes/font_size = 16
+text = "Coach choice only effects the visual guide for your session. It has no affect on playback tempo or quality."

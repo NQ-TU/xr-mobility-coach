@@ -1,0 +1,827 @@
+[gd_scene format=3 uid="uid://be6fdhj68l2xj"]
+
+[ext_resource type="Script" uid="uid://tgv3jvwp5qnu" path="res://ui/playback_panel.gd" id="1_playback"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_glass"]
+bg_color = Color(0.930392, 0.980392, 0.988235, 0.28)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 0.34)
+corner_radius_top_left = 34
+corner_radius_top_right = 34
+corner_radius_bottom_right = 34
+corner_radius_bottom_left = 34
+shadow_color = Color(0.0352941, 0.145098, 0.188235, 0.18)
+shadow_size = 18
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_secondary_button"]
+content_margin_left = 12.0
+content_margin_top = 8.0
+content_margin_right = 12.0
+content_margin_bottom = 8.0
+bg_color = Color(0.929412, 0.972549, 0.984314, 0.8)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.741176, 0.870588, 0.901961, 0.95)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_primary_button"]
+content_margin_left = 16.0
+content_margin_top = 9.0
+content_margin_right = 16.0
+content_margin_bottom = 9.0
+bg_color = Color(0.341176, 0.372549, 0.94902, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0.145098, 0.168627, 0.545098, 0.2)
+shadow_size = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.968627, 0.988235, 0.992157, 0.88)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 0.44)
+corner_radius_top_left = 28
+corner_radius_top_right = 28
+corner_radius_bottom_right = 28
+corner_radius_bottom_left = 28
+shadow_color = Color(0.0509804, 0.168627, 0.223529, 0.12)
+shadow_size = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel_soft"]
+bg_color = Color(0.94902, 0.984314, 0.992157, 0.82)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 0.34)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[node name="PlaybackPanel" type="Control" unique_id=66136245]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_playback")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1785117941]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GlassPanel" type="PanelContainer" parent="CenterContainer" unique_id=1435784663]
+custom_minimum_size = Vector2(1480, 820)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_glass")
+
+[node name="ContentMargin" type="MarginContainer" parent="CenterContainer/GlassPanel" unique_id=180833943]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 24
+
+[node name="RootColumn" type="VBoxContainer" parent="CenterContainer/GlassPanel/ContentMargin" unique_id=1300870549]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Header" type="HBoxContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn" unique_id=1022710801]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="TitleColumn" type="VBoxContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/Header" unique_id=2079950384]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="EyebrowLabel" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/Header/TitleColumn" unique_id=1143978142]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.341176, 0.372549, 0.94902, 1)
+theme_override_font_sizes/font_size = 14
+text = "Session Playback"
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/Header/TitleColumn" unique_id=72874137]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0823529, 0.129412, 0.207843, 1)
+theme_override_font_sizes/font_size = 28
+text = "Guided Session"
+
+[node name="SubtitleLabel" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/Header/TitleColumn" unique_id=851197735]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.239216, 0.333333, 0.431373, 1)
+theme_override_font_sizes/font_size = 15
+text = "Advance through the routine one set at a time and submit your completed session."
+autowrap_mode = 3
+
+[node name="MetaColumn" type="VBoxContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/Header" unique_id=1601787473]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="UserLabel" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/Header/MetaColumn" unique_id=1200958318]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.121569, 0.172549, 0.254902, 1)
+theme_override_font_sizes/font_size = 15
+text = "Signed in as guest"
+horizontal_alignment = 2
+
+[node name="StateLabel" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/Header/MetaColumn" unique_id=2144400831]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.317647, 0.403922, 0.490196, 0.92)
+theme_override_font_sizes/font_size = 13
+text = "State: Ready"
+horizontal_alignment = 2
+
+[node name="MoveHintLabel" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/Header/MetaColumn" unique_id=903039914]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.317647, 0.403922, 0.490196, 0.92)
+theme_override_font_sizes/font_size = 12
+text = "Tip: hold B or Y on either controller to reposition this panel. Hold A or X to reposition the coach."
+horizontal_alignment = 2
+
+[node name="ActionRow" type="HBoxContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/Header" unique_id=1860502275]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="BackButton" type="Button" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/Header/ActionRow" unique_id=1390834773]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.117647, 0.278431, 0.341176, 1)
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_secondary_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_secondary_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_secondary_button")
+theme_override_styles/focus = SubResource("StyleBoxFlat_secondary_button")
+text = "Back"
+
+[node name="FinishButton" type="Button" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/Header/ActionRow" unique_id=2140880239]
+custom_minimum_size = Vector2(170, 46)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_primary_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_primary_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_primary_button")
+theme_override_styles/focus = SubResource("StyleBoxFlat_primary_button")
+text = "Finish Session"
+
+[node name="BodyRow" type="HBoxContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn" unique_id=999176991]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 18
+
+[node name="SessionPane" type="VBoxContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow" unique_id=520726978]
+custom_minimum_size = Vector2(430, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SessionCard" type="PanelContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane" unique_id=436289707]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="SessionMargin" type="MarginContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard" unique_id=211526628]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="SessionColumn" type="VBoxContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin" unique_id=649829359]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="CurrentExerciseEyebrow" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn" unique_id=1971151857]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.341176, 0.372549, 0.94902, 1)
+theme_override_font_sizes/font_size = 13
+text = "Current Exercise"
+
+[node name="CurrentExerciseTitle" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn" unique_id=1747232491]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0823529, 0.129412, 0.207843, 1)
+theme_override_font_sizes/font_size = 24
+text = "No routine selected"
+autowrap_mode = 3
+
+[node name="CurrentExerciseSubtitle" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn" unique_id=1867657060]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.180392, 0.270588, 0.360784, 1)
+theme_override_font_sizes/font_size = 15
+text = "Select a routine from the library to begin playback tracking."
+autowrap_mode = 3
+
+[node name="CurrentExerciseNotes" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn" unique_id=1739906404]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0.317647, 0.403922, 0.490196, 1)
+theme_override_font_sizes/font_size = 14
+text = "Exercise guidance appears here."
+autowrap_mode = 3
+
+[node name="StatGrid" type="GridContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn" unique_id=922870038]
+layout_mode = 2
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+columns = 2
+
+[node name="ExerciseProgressCard" type="PanelContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/StatGrid" unique_id=1417105628]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel_soft")
+
+[node name="ProgressMargin" type="MarginContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/StatGrid/ExerciseProgressCard" unique_id=1826365933]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="ProgressColumn" type="VBoxContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/StatGrid/ExerciseProgressCard/ProgressMargin" unique_id=2069412189]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="ProgressLabel" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/StatGrid/ExerciseProgressCard/ProgressMargin/ProgressColumn" unique_id=786872852]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.317647, 0.403922, 0.490196, 1)
+theme_override_font_sizes/font_size = 13
+text = "Exercise"
+
+[node name="ProgressValue" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/StatGrid/ExerciseProgressCard/ProgressMargin/ProgressColumn" unique_id=1304301518]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0823529, 0.129412, 0.207843, 1)
+theme_override_font_sizes/font_size = 18
+text = "-"
+
+[node name="ProgressCaption" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/StatGrid/ExerciseProgressCard/ProgressMargin/ProgressColumn" unique_id=1006640425]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.317647, 0.403922, 0.490196, 1)
+theme_override_font_sizes/font_size = 13
+text = "Current exercise index."
+
+[node name="SetProgressCard" type="PanelContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/StatGrid" unique_id=2106363429]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel_soft")
+
+[node name="SetMargin" type="MarginContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/StatGrid/SetProgressCard" unique_id=1934356387]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="SetColumn" type="VBoxContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/StatGrid/SetProgressCard/SetMargin" unique_id=1147878451]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="SetLabel" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/StatGrid/SetProgressCard/SetMargin/SetColumn" unique_id=952198103]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.317647, 0.403922, 0.490196, 1)
+theme_override_font_sizes/font_size = 13
+text = "Set"
+
+[node name="SetValue" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/StatGrid/SetProgressCard/SetMargin/SetColumn" unique_id=2071857241]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0823529, 0.129412, 0.207843, 1)
+theme_override_font_sizes/font_size = 18
+text = "-"
+
+[node name="SetCaption" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/StatGrid/SetProgressCard/SetMargin/SetColumn" unique_id=1814192463]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.317647, 0.403922, 0.490196, 1)
+theme_override_font_sizes/font_size = 13
+text = "Current set within the exercise."
+
+[node name="TargetCard" type="PanelContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/StatGrid" unique_id=150095509]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel_soft")
+
+[node name="TargetMargin" type="MarginContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/StatGrid/TargetCard" unique_id=751867155]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="TargetColumn" type="VBoxContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/StatGrid/TargetCard/TargetMargin" unique_id=726257099]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="TargetLabel" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/StatGrid/TargetCard/TargetMargin/TargetColumn" unique_id=323208472]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.317647, 0.403922, 0.490196, 1)
+theme_override_font_sizes/font_size = 13
+text = "Target"
+
+[node name="TargetValue" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/StatGrid/TargetCard/TargetMargin/TargetColumn" unique_id=1449944874]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0823529, 0.129412, 0.207843, 1)
+theme_override_font_sizes/font_size = 18
+text = "-"
+
+[node name="TargetCaption" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/StatGrid/TargetCard/TargetMargin/TargetColumn" unique_id=1984744535]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.317647, 0.403922, 0.490196, 1)
+theme_override_font_sizes/font_size = 13
+text = "Target reps or hold time."
+
+[node name="TimerCard" type="PanelContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/StatGrid" unique_id=353249990]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel_soft")
+
+[node name="TimerMargin" type="MarginContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/StatGrid/TimerCard" unique_id=599831416]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="TimerColumn" type="VBoxContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/StatGrid/TimerCard/TimerMargin" unique_id=1218672247]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="TimerLabel" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/StatGrid/TimerCard/TimerMargin/TimerColumn" unique_id=1212572736]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.317647, 0.403922, 0.490196, 1)
+theme_override_font_sizes/font_size = 13
+text = "Set Timer"
+
+[node name="TimerValue" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/StatGrid/TimerCard/TimerMargin/TimerColumn" unique_id=636903148]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0823529, 0.129412, 0.207843, 1)
+theme_override_font_sizes/font_size = 18
+text = "00:00"
+
+[node name="TimerCaption" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/StatGrid/TimerCard/TimerMargin/TimerColumn" unique_id=1725142736]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.317647, 0.403922, 0.490196, 1)
+theme_override_font_sizes/font_size = 13
+text = "Live timer for the active set."
+
+[node name="SessionTimeCard" type="PanelContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/StatGrid" unique_id=1887948370]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel_soft")
+
+[node name="SessionTimeMargin" type="MarginContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/StatGrid/SessionTimeCard" unique_id=1408087224]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="SessionTimeColumn" type="VBoxContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/StatGrid/SessionTimeCard/SessionTimeMargin" unique_id=216057832]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="SessionTimeLabel" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/StatGrid/SessionTimeCard/SessionTimeMargin/SessionTimeColumn" unique_id=2107036361]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.317647, 0.403922, 0.490196, 1)
+theme_override_font_sizes/font_size = 13
+text = "Session Time"
+
+[node name="SessionTimeValue" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/StatGrid/SessionTimeCard/SessionTimeMargin/SessionTimeColumn" unique_id=2093006590]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0823529, 0.129412, 0.207843, 1)
+theme_override_font_sizes/font_size = 18
+text = "00:00"
+
+[node name="SessionTimeCaption" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/StatGrid/SessionTimeCard/SessionTimeMargin/SessionTimeColumn" unique_id=677146156]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.317647, 0.403922, 0.490196, 1)
+theme_override_font_sizes/font_size = 13
+text = "Elapsed time since the session started."
+
+[node name="LiveStateCard" type="PanelContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/StatGrid" unique_id=1353033069]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel_soft")
+
+[node name="LiveStateMargin" type="MarginContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/StatGrid/LiveStateCard" unique_id=234470438]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="LiveStateColumn" type="VBoxContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/StatGrid/LiveStateCard/LiveStateMargin" unique_id=1261302190]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="LiveStateLabel" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/StatGrid/LiveStateCard/LiveStateMargin/LiveStateColumn" unique_id=419817460]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.317647, 0.403922, 0.490196, 1)
+theme_override_font_sizes/font_size = 13
+text = "Live State"
+
+[node name="LiveStateValue" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/StatGrid/LiveStateCard/LiveStateMargin/LiveStateColumn" unique_id=1284167325]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0823529, 0.129412, 0.207843, 1)
+theme_override_font_sizes/font_size = 18
+text = "Ready"
+
+[node name="LiveStateCaption" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/StatGrid/LiveStateCard/LiveStateMargin/LiveStateColumn" unique_id=1247688329]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.317647, 0.403922, 0.490196, 1)
+theme_override_font_sizes/font_size = 13
+text = "Ready, running, paused, or complete."
+
+[node name="ControlsRow" type="HBoxContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn" unique_id=478666473]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="StartPauseButton" type="Button" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/ControlsRow" unique_id=1161962062]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_primary_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_primary_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_primary_button")
+theme_override_styles/focus = SubResource("StyleBoxFlat_primary_button")
+text = "Start Session"
+
+[node name="CompleteSetButton" type="Button" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/ControlsRow" unique_id=1032103093]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.117647, 0.278431, 0.341176, 1)
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_secondary_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_secondary_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_secondary_button")
+theme_override_styles/focus = SubResource("StyleBoxFlat_secondary_button")
+text = "Complete Set"
+
+[node name="SkipSetButton" type="Button" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/ControlsRow" unique_id=47145182]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.117647, 0.278431, 0.341176, 1)
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_secondary_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_secondary_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_secondary_button")
+theme_override_styles/focus = SubResource("StyleBoxFlat_secondary_button")
+text = "Skip Set"
+
+[node name="EffortCard" type="PanelContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn" unique_id=730540367]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel_soft")
+
+[node name="EffortMargin" type="MarginContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/EffortCard" unique_id=1760043148]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 14
+
+[node name="EffortRow" type="HBoxContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/EffortCard/EffortMargin" unique_id=1595972241]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="EffortLabel" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/EffortCard/EffortMargin/EffortRow" unique_id=1260015489]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.117647, 0.278431, 0.341176, 1)
+theme_override_font_sizes/font_size = 15
+text = "Overall RPE"
+
+[node name="DecreaseRpeButton" type="Button" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/EffortCard/EffortMargin/EffortRow" unique_id=1956079502]
+custom_minimum_size = Vector2(42, 38)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.117647, 0.278431, 0.341176, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_secondary_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_secondary_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_secondary_button")
+theme_override_styles/focus = SubResource("StyleBoxFlat_secondary_button")
+text = "-"
+
+[node name="EffortValueLabel" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/EffortCard/EffortMargin/EffortRow" unique_id=2050541112]
+custom_minimum_size = Vector2(36, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0823529, 0.129412, 0.207843, 1)
+theme_override_font_sizes/font_size = 18
+text = "6"
+horizontal_alignment = 1
+
+[node name="IncreaseRpeButton" type="Button" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/EffortCard/EffortMargin/EffortRow" unique_id=1761072399]
+custom_minimum_size = Vector2(42, 38)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.117647, 0.278431, 0.341176, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_secondary_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_secondary_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_secondary_button")
+theme_override_styles/focus = SubResource("StyleBoxFlat_secondary_button")
+text = "+"
+
+[node name="StatusCard" type="PanelContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn" unique_id=1709672634]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel_soft")
+
+[node name="StatusMargin" type="MarginContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/StatusCard" unique_id=1403690728]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 12
+
+[node name="StatusLabel" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SessionPane/SessionCard/SessionMargin/SessionColumn/StatusCard/StatusMargin" unique_id=1206576461]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.317647, 0.403922, 0.490196, 1)
+theme_override_font_sizes/font_size = 15
+text = "Select a routine from the library to begin playback tracking."
+autowrap_mode = 3
+
+[node name="SequencePane" type="VBoxContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow" unique_id=1223499535]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SequenceCard" type="PanelContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SequencePane" unique_id=1772490162]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="SequenceMargin" type="MarginContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SequencePane/SequenceCard" unique_id=489004668]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 18
+
+[node name="SequenceColumn" type="VBoxContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SequencePane/SequenceCard/SequenceMargin" unique_id=1618185618]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="TopRow" type="HBoxContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SequencePane/SequenceCard/SequenceMargin/SequenceColumn" unique_id=107186501]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="DetailHeader" type="VBoxContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SequencePane/SequenceCard/SequenceMargin/SequenceColumn/TopRow" unique_id=668436401]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="DetailEyebrow" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SequencePane/SequenceCard/SequenceMargin/SequenceColumn/TopRow/DetailHeader" unique_id=1931532598]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.341176, 0.372549, 0.94902, 1)
+theme_override_font_sizes/font_size = 13
+text = "Routine Sequence"
+
+[node name="RoutineTitle" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SequencePane/SequenceCard/SequenceMargin/SequenceColumn/TopRow/DetailHeader" unique_id=888646919]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0823529, 0.129412, 0.207843, 1)
+theme_override_font_sizes/font_size = 26
+text = "Guided Session"
+
+[node name="RoutineSubtitle" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SequencePane/SequenceCard/SequenceMargin/SequenceColumn/TopRow/DetailHeader" unique_id=2118394546]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.317647, 0.403922, 0.490196, 1)
+theme_override_font_sizes/font_size = 15
+text = "Routine metadata appears here."
+autowrap_mode = 3
+
+[node name="SummaryGrid" type="GridContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SequencePane/SequenceCard/SequenceMargin/SequenceColumn" unique_id=408549738]
+layout_mode = 2
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+columns = 3
+
+[node name="TargetCard" type="PanelContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SequencePane/SequenceCard/SequenceMargin/SequenceColumn/SummaryGrid" unique_id=79631132]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel_soft")
+
+[node name="TargetMargin" type="MarginContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SequencePane/SequenceCard/SequenceMargin/SequenceColumn/SummaryGrid/TargetCard" unique_id=1685048119]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="TargetColumn" type="VBoxContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SequencePane/SequenceCard/SequenceMargin/SequenceColumn/SummaryGrid/TargetCard/TargetMargin" unique_id=2087488147]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="TargetLabel" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SequencePane/SequenceCard/SequenceMargin/SequenceColumn/SummaryGrid/TargetCard/TargetMargin/TargetColumn" unique_id=1176767022]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.317647, 0.403922, 0.490196, 1)
+theme_override_font_sizes/font_size = 13
+text = "Target Area"
+
+[node name="TargetValue" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SequencePane/SequenceCard/SequenceMargin/SequenceColumn/SummaryGrid/TargetCard/TargetMargin/TargetColumn" unique_id=1961936897]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0823529, 0.129412, 0.207843, 1)
+theme_override_font_sizes/font_size = 18
+text = "-"
+
+[node name="TargetCaption" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SequencePane/SequenceCard/SequenceMargin/SequenceColumn/SummaryGrid/TargetCard/TargetMargin/TargetColumn" unique_id=1915097129]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.317647, 0.403922, 0.490196, 1)
+theme_override_font_sizes/font_size = 13
+text = "Primary routine focus."
+
+[node name="DurationCard" type="PanelContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SequencePane/SequenceCard/SequenceMargin/SequenceColumn/SummaryGrid" unique_id=611529206]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel_soft")
+
+[node name="DurationMargin" type="MarginContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SequencePane/SequenceCard/SequenceMargin/SequenceColumn/SummaryGrid/DurationCard" unique_id=1728806494]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="DurationColumn" type="VBoxContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SequencePane/SequenceCard/SequenceMargin/SequenceColumn/SummaryGrid/DurationCard/DurationMargin" unique_id=244886474]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="DurationLabel" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SequencePane/SequenceCard/SequenceMargin/SequenceColumn/SummaryGrid/DurationCard/DurationMargin/DurationColumn" unique_id=2110820928]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.317647, 0.403922, 0.490196, 1)
+theme_override_font_sizes/font_size = 13
+text = "Estimated Length"
+
+[node name="DurationValue" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SequencePane/SequenceCard/SequenceMargin/SequenceColumn/SummaryGrid/DurationCard/DurationMargin/DurationColumn" unique_id=116277628]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0823529, 0.129412, 0.207843, 1)
+theme_override_font_sizes/font_size = 18
+text = "-"
+
+[node name="DurationCaption" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SequencePane/SequenceCard/SequenceMargin/SequenceColumn/SummaryGrid/DurationCard/DurationMargin/DurationColumn" unique_id=2099974657]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.317647, 0.403922, 0.490196, 1)
+theme_override_font_sizes/font_size = 13
+text = "Projected guided session time."
+
+[node name="ExerciseCountCard" type="PanelContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SequencePane/SequenceCard/SequenceMargin/SequenceColumn/SummaryGrid" unique_id=1234439790]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel_soft")
+
+[node name="ExerciseCountMargin" type="MarginContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SequencePane/SequenceCard/SequenceMargin/SequenceColumn/SummaryGrid/ExerciseCountCard" unique_id=1282740446]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="ExerciseCountColumn" type="VBoxContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SequencePane/SequenceCard/SequenceMargin/SequenceColumn/SummaryGrid/ExerciseCountCard/ExerciseCountMargin" unique_id=1163154507]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="ExerciseCountLabel" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SequencePane/SequenceCard/SequenceMargin/SequenceColumn/SummaryGrid/ExerciseCountCard/ExerciseCountMargin/ExerciseCountColumn" unique_id=805357984]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.317647, 0.403922, 0.490196, 1)
+theme_override_font_sizes/font_size = 13
+text = "Exercise Count"
+
+[node name="ExerciseCountValue" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SequencePane/SequenceCard/SequenceMargin/SequenceColumn/SummaryGrid/ExerciseCountCard/ExerciseCountMargin/ExerciseCountColumn" unique_id=306238746]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0823529, 0.129412, 0.207843, 1)
+theme_override_font_sizes/font_size = 18
+text = "-"
+
+[node name="ExerciseCountCaption" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SequencePane/SequenceCard/SequenceMargin/SequenceColumn/SummaryGrid/ExerciseCountCard/ExerciseCountMargin/ExerciseCountColumn" unique_id=1052961161]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.317647, 0.403922, 0.490196, 1)
+theme_override_font_sizes/font_size = 13
+text = "Movements in this routine."
+
+[node name="ExerciseHeader" type="HBoxContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SequencePane/SequenceCard/SequenceMargin/SequenceColumn" unique_id=981949521]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ExerciseLabel" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SequencePane/SequenceCard/SequenceMargin/SequenceColumn/ExerciseHeader" unique_id=920138843]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.0823529, 0.129412, 0.207843, 1)
+theme_override_font_sizes/font_size = 20
+text = "Exercise Sequence"
+
+[node name="ExerciseHintLabel" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SequencePane/SequenceCard/SequenceMargin/SequenceColumn/ExerciseHeader" unique_id=1522467872]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.317647, 0.403922, 0.490196, 1)
+theme_override_font_sizes/font_size = 13
+text = "Exercise sequence appears here."
+horizontal_alignment = 2
+
+[node name="ExerciseScrollUpButton" type="Button" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SequencePane/SequenceCard/SequenceMargin/SequenceColumn/ExerciseHeader" unique_id=512051475]
+custom_minimum_size = Vector2(74, 38)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.117647, 0.278431, 0.341176, 1)
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_secondary_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_secondary_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_secondary_button")
+theme_override_styles/focus = SubResource("StyleBoxFlat_secondary_button")
+text = "Up"
+
+[node name="ExerciseScrollDownButton" type="Button" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SequencePane/SequenceCard/SequenceMargin/SequenceColumn/ExerciseHeader" unique_id=1000491289]
+custom_minimum_size = Vector2(86, 38)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.117647, 0.278431, 0.341176, 1)
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_secondary_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_secondary_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_secondary_button")
+theme_override_styles/focus = SubResource("StyleBoxFlat_secondary_button")
+text = "Down"
+
+[node name="ExerciseScroll" type="ScrollContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SequencePane/SequenceCard/SequenceMargin/SequenceColumn" unique_id=669364956]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ExerciseList" type="VBoxContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/BodyRow/SequencePane/SequenceCard/SequenceMargin/SequenceColumn/ExerciseScroll" unique_id=326461075]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+
+[node name="CompletionCard" type="PanelContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn" unique_id=865365963]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="CompletionMargin" type="MarginContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/CompletionCard" unique_id=469595275]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="CompletionColumn" type="VBoxContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/CompletionCard/CompletionMargin" unique_id=780042501]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+
+[node name="CompletionEyebrow" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/CompletionCard/CompletionMargin/CompletionColumn" unique_id=2005570084]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.341176, 0.372549, 0.94902, 1)
+theme_override_font_sizes/font_size = 13
+text = "Session Complete"
+
+[node name="CompletionTitleLabel" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/CompletionCard/CompletionMargin/CompletionColumn" unique_id=1936377334]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0823529, 0.129412, 0.207843, 1)
+theme_override_font_sizes/font_size = 26
+text = "Session Summary"
+
+[node name="CompletionStatusLabel" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/CompletionCard/CompletionMargin/CompletionColumn" unique_id=1532777152]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0509804, 0.509804, 0.337255, 1)
+theme_override_font_sizes/font_size = 16
+text = "Session submitted successfully."
+autowrap_mode = 3
+
+[node name="CompletionScroll" type="ScrollContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/CompletionCard/CompletionMargin/CompletionColumn" unique_id=100486161]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="CompletionSummaryLabel" type="RichTextLabel" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/CompletionCard/CompletionMargin/CompletionColumn/CompletionScroll" unique_id=1458734017]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "Summary appears here."
+
+[node name="CompletionActionRow" type="HBoxContainer" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/CompletionCard/CompletionMargin/CompletionColumn" unique_id=364005122]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="BackToLibraryButton" type="Button" parent="CenterContainer/GlassPanel/ContentMargin/RootColumn/CompletionCard/CompletionMargin/CompletionColumn/CompletionActionRow" unique_id=1060692120]
+custom_minimum_size = Vector2(180, 46)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.117647, 0.278431, 0.341176, 1)
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_secondary_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_secondary_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_secondary_button")
+theme_override_styles/focus = SubResource("StyleBoxFlat_secondary_button")
+text = "Back To Library"
