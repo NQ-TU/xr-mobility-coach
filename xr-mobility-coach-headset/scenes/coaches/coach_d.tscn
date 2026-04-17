@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/coach_avatar.gd" id="1_avatar"]
+[ext_resource type="PackedScene" path="res://assets/coaches/coach_d/coach_d.fbx" id="2_model"]
+[ext_resource type="PackedScene" path="res://assets/animations/idling/Standing_relaxed_idle.fbx" id="3_idle"]
+
+[node name="CoachD" type="Node3D"]
+script = ExtResource("1_avatar")
+model_scene = ExtResource("2_model")
+idle_scene = ExtResource("3_idle")
+preferred_idle_animation_name = ""
+auto_play_idle = true

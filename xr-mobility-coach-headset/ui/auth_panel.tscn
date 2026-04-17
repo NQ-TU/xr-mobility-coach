@@ -1,0 +1,535 @@
+[gd_scene format=3 uid="uid://b1sp7q1b2oyt"]
+
+[ext_resource type="Script" uid="uid://cxu3vg4wmbdrm" path="res://ui/auth_panel.gd" id="1_auth"]
+[ext_resource type="Texture2D" uid="uid://0262bo5vedfn" path="res://assets/ui/app_logo.png" id="2_logo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_glass"]
+bg_color = Color(0.930392, 0.980392, 0.988235, 0.28)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 0.34)
+corner_radius_top_left = 34
+corner_radius_top_right = 34
+corner_radius_bottom_right = 34
+corner_radius_bottom_left = 34
+shadow_color = Color(0.0352941, 0.145098, 0.188235, 0.18)
+shadow_size = 18
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_feature_card"]
+bg_color = Color(0.941176, 0.984314, 0.988235, 0.58)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 0.28)
+corner_radius_top_left = 22
+corner_radius_top_right = 22
+corner_radius_bottom_right = 22
+corner_radius_bottom_left = 22
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_form_card"]
+bg_color = Color(0.968627, 0.988235, 0.992157, 0.86)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 0.42)
+corner_radius_top_left = 28
+corner_radius_top_right = 28
+corner_radius_bottom_right = 28
+corner_radius_bottom_left = 28
+shadow_color = Color(0.0509804, 0.168627, 0.223529, 0.14)
+shadow_size = 14
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_form_inner"]
+content_margin_left = 14.0
+content_margin_top = 14.0
+content_margin_right = 14.0
+content_margin_bottom = 14.0
+bg_color = Color(0.952941, 0.984314, 0.992157, 0.92)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.788235, 0.890196, 0.917647, 0.95)
+corner_radius_top_left = 22
+corner_radius_top_right = 22
+corner_radius_bottom_right = 22
+corner_radius_bottom_left = 22
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tab_unselected"]
+content_margin_left = 14.0
+content_margin_top = 8.0
+content_margin_right = 14.0
+content_margin_bottom = 8.0
+bg_color = Color(0.882353, 0.94902, 0.972549, 0.72)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tab_selected"]
+content_margin_left = 14.0
+content_margin_top = 8.0
+content_margin_right = 14.0
+content_margin_bottom = 8.0
+bg_color = Color(0.341176, 0.372549, 0.94902, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_input"]
+content_margin_left = 14.0
+content_margin_top = 10.0
+content_margin_right = 14.0
+content_margin_bottom = 10.0
+bg_color = Color(0.976471, 0.992157, 0.996078, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.713726, 0.85098, 0.886275, 0.95)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_primary_button"]
+content_margin_left = 16.0
+content_margin_top = 12.0
+content_margin_right = 16.0
+content_margin_bottom = 12.0
+bg_color = Color(0.341176, 0.372549, 0.94902, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0.145098, 0.168627, 0.545098, 0.2)
+shadow_size = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_secondary_button"]
+content_margin_left = 14.0
+content_margin_top = 10.0
+content_margin_right = 14.0
+content_margin_bottom = 10.0
+bg_color = Color(0.929412, 0.972549, 0.984314, 0.78)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.741176, 0.870588, 0.901961, 0.95)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[node name="AuthPanel" type="Control" unique_id=1332030847]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_auth")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=330787155]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GlassPanel" type="PanelContainer" parent="CenterContainer" unique_id=984163397]
+custom_minimum_size = Vector2(1480, 820)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_glass")
+
+[node name="ContentMargin" type="MarginContainer" parent="CenterContainer/GlassPanel" unique_id=1313043655]
+layout_mode = 2
+theme_override_constants/margin_left = 44
+theme_override_constants/margin_top = 44
+theme_override_constants/margin_right = 44
+theme_override_constants/margin_bottom = 44
+
+[node name="ContentRow" type="HBoxContainer" parent="CenterContainer/GlassPanel/ContentMargin" unique_id=354244983]
+layout_mode = 2
+theme_override_constants/separation = 44
+
+[node name="BrandColumn" type="VBoxContainer" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow" unique_id=877943438]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 18
+
+[node name="BrandRow" type="HBoxContainer" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/BrandColumn" unique_id=902476783]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="BrandMark" type="TextureRect" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/BrandColumn/BrandRow" unique_id=1352577809]
+custom_minimum_size = Vector2(56, 56)
+layout_mode = 2
+texture = ExtResource("2_logo")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BrandLabel" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/BrandColumn/BrandRow" unique_id=44816107]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.121569, 0.172549, 0.254902, 1)
+theme_override_font_sizes/font_size = 24
+text = "MobilityXR"
+
+[node name="HeroTitle" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/BrandColumn" unique_id=2131645165]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0823529, 0.129412, 0.207843, 1)
+theme_override_font_sizes/font_size = 58
+text = "Move Better."
+
+[node name="HeroAccent" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/BrandColumn" unique_id=1187102287]
+modulate = Color(0.341176, 0.372549, 0.94902, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 58
+text = "Live Longer."
+
+[node name="HeroBody" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/BrandColumn" unique_id=2092645172]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.239216, 0.333333, 0.431373, 1)
+theme_override_font_sizes/font_size = 24
+text = "Your AI-powered mobility coach. Restore range of motion, reduce pain, and optimize your movement health. 
+
+Follow guided exercise demonstrations of your routines in Extended Reality (XR).
+"
+autowrap_mode = 3
+
+[node name="SectionRow" type="HBoxContainer" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/BrandColumn" unique_id=200112994]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="XrSection" type="VBoxContainer" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/BrandColumn/SectionRow" unique_id=671196104]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 14
+
+[node name="ProofLabel" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/BrandColumn/SectionRow/XrSection" unique_id=950019030]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.121569, 0.172549, 0.254902, 1)
+theme_override_font_sizes/font_size = 24
+text = "Inside XR you can:"
+
+[node name="XrFeatureGrid" type="GridContainer" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/BrandColumn/SectionRow/XrSection" unique_id=562537945]
+layout_mode = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+columns = 2
+
+[node name="FeatureOne" type="PanelContainer" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/BrandColumn/SectionRow/XrSection/XrFeatureGrid" unique_id=1870499857]
+custom_minimum_size = Vector2(0, 130)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_feature_card")
+
+[node name="FeatureMargin" type="MarginContainer" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/BrandColumn/SectionRow/XrSection/XrFeatureGrid/FeatureOne" unique_id=1884403730]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 18
+
+[node name="FeatureColumn" type="VBoxContainer" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/BrandColumn/SectionRow/XrSection/XrFeatureGrid/FeatureOne/FeatureMargin" unique_id=581017356]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="FeatureTitle" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/BrandColumn/SectionRow/XrSection/XrFeatureGrid/FeatureOne/FeatureMargin/FeatureColumn" unique_id=1821266890]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0823529, 0.129412, 0.207843, 1)
+theme_override_font_sizes/font_size = 22
+text = "Guided Routines"
+
+[node name="FeatureBody" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/BrandColumn/SectionRow/XrSection/XrFeatureGrid/FeatureOne/FeatureMargin/FeatureColumn" unique_id=587543034]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.239216, 0.333333, 0.431373, 1)
+theme_override_font_sizes/font_size = 18
+text = "Load your routines in XR and follow along the coaches exercise demos."
+autowrap_mode = 3
+
+[node name="FeatureTwo" type="PanelContainer" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/BrandColumn/SectionRow/XrSection/XrFeatureGrid" unique_id=286739580]
+custom_minimum_size = Vector2(0, 130)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_feature_card")
+
+[node name="FeatureMargin" type="MarginContainer" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/BrandColumn/SectionRow/XrSection/XrFeatureGrid/FeatureTwo" unique_id=1515198380]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 18
+
+[node name="FeatureColumn" type="VBoxContainer" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/BrandColumn/SectionRow/XrSection/XrFeatureGrid/FeatureTwo/FeatureMargin" unique_id=1385535088]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="FeatureTitle" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/BrandColumn/SectionRow/XrSection/XrFeatureGrid/FeatureTwo/FeatureMargin/FeatureColumn" unique_id=2057796213]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0823529, 0.129412, 0.207843, 1)
+theme_override_font_sizes/font_size = 22
+text = "Session Metrics"
+
+[node name="FeatureBody" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/BrandColumn/SectionRow/XrSection/XrFeatureGrid/FeatureTwo/FeatureMargin/FeatureColumn" unique_id=639919003]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.239216, 0.333333, 0.431373, 1)
+theme_override_font_sizes/font_size = 18
+text = "Track session data and sync it back to your account."
+autowrap_mode = 3
+
+[node name="WebSection" type="VBoxContainer" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/BrandColumn/SectionRow" unique_id=1903714258]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 14
+
+[node name="WebLabel" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/BrandColumn/SectionRow/WebSection" unique_id=600150942]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.121569, 0.172549, 0.254902, 1)
+theme_override_font_sizes/font_size = 24
+text = "On the web dashboard you can:"
+
+[node name="WebFeatureGrid" type="GridContainer" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/BrandColumn/SectionRow/WebSection" unique_id=1328180663]
+layout_mode = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+columns = 2
+
+[node name="FeatureThree" type="PanelContainer" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/BrandColumn/SectionRow/WebSection/WebFeatureGrid" unique_id=1441093182]
+custom_minimum_size = Vector2(0, 130)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_feature_card")
+
+[node name="FeatureMargin" type="MarginContainer" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/BrandColumn/SectionRow/WebSection/WebFeatureGrid/FeatureThree" unique_id=1743738548]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 18
+
+[node name="FeatureColumn" type="VBoxContainer" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/BrandColumn/SectionRow/WebSection/WebFeatureGrid/FeatureThree/FeatureMargin" unique_id=346084035]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="FeatureTitle" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/BrandColumn/SectionRow/WebSection/WebFeatureGrid/FeatureThree/FeatureMargin/FeatureColumn" unique_id=1628433754]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0823529, 0.129412, 0.207843, 1)
+theme_override_font_sizes/font_size = 22
+text = "AI Coach + History"
+
+[node name="FeatureBody" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/BrandColumn/SectionRow/WebSection/WebFeatureGrid/FeatureThree/FeatureMargin/FeatureColumn" unique_id=1769760947]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.239216, 0.333333, 0.431373, 1)
+theme_override_font_sizes/font_size = 18
+text = "Chat with your AI coach and review progress history from the web dashboard."
+autowrap_mode = 3
+
+[node name="FeatureFour" type="PanelContainer" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/BrandColumn/SectionRow/WebSection/WebFeatureGrid" unique_id=948260313]
+custom_minimum_size = Vector2(0, 130)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_feature_card")
+
+[node name="FeatureMargin" type="MarginContainer" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/BrandColumn/SectionRow/WebSection/WebFeatureGrid/FeatureFour" unique_id=1132994644]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 18
+
+[node name="FeatureColumn" type="VBoxContainer" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/BrandColumn/SectionRow/WebSection/WebFeatureGrid/FeatureFour/FeatureMargin" unique_id=1714051730]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="FeatureTitle" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/BrandColumn/SectionRow/WebSection/WebFeatureGrid/FeatureFour/FeatureMargin/FeatureColumn" unique_id=163796801]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0823529, 0.129412, 0.207843, 1)
+theme_override_font_sizes/font_size = 22
+text = "Build New Routines"
+
+[node name="FeatureBody" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/BrandColumn/SectionRow/WebSection/WebFeatureGrid/FeatureFour/FeatureMargin/FeatureColumn" unique_id=1395550706]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.239216, 0.333333, 0.431373, 1)
+theme_override_font_sizes/font_size = 18
+text = "Generate or build a routine through the web dashboard, then load it here in XR."
+autowrap_mode = 3
+
+[node name="FormCard" type="PanelContainer" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow" unique_id=771822852]
+custom_minimum_size = Vector2(560, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_form_card")
+
+[node name="FormMargin" type="MarginContainer" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/FormCard" unique_id=1770440196]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 28
+
+[node name="FormColumn" type="VBoxContainer" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/FormCard/FormMargin" unique_id=730989131]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="FormTitle" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/FormCard/FormMargin/FormColumn" unique_id=1801967331]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0823529, 0.129412, 0.207843, 1)
+theme_override_font_sizes/font_size = 34
+text = "Welcome Back"
+
+[node name="FormSubtitle" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/FormCard/FormMargin/FormColumn" unique_id=1925783587]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.317647, 0.403922, 0.490196, 1)
+theme_override_font_sizes/font_size = 18
+text = "Sign in or create an account to access your saved routines."
+autowrap_mode = 3
+
+[node name="MoveHintLabel" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/FormCard/FormMargin/FormColumn" unique_id=1710152201]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.317647, 0.403922, 0.490196, 0.92)
+theme_override_font_sizes/font_size = 15
+text = "Tip: hold B or Y on either controller to reposition this panel."
+autowrap_mode = 3
+
+[node name="ModeTabs" type="TabContainer" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/FormCard/FormMargin/FormColumn" unique_id=678194902]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_selected_color = Color(1, 1, 1, 1)
+theme_override_colors/font_unselected_color = Color(0.172549, 0.247059, 0.329412, 1)
+theme_override_styles/panel = SubResource("StyleBoxFlat_form_inner")
+theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_tab_unselected")
+theme_override_styles/tab_selected = SubResource("StyleBoxFlat_tab_selected")
+current_tab = 0
+
+[node name="Login" type="VBoxContainer" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/FormCard/FormMargin/FormColumn/ModeTabs" unique_id=663770959]
+layout_mode = 2
+theme_override_constants/separation = 14
+metadata/_tab_index = 0
+
+[node name="FormFields" type="VBoxContainer" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/FormCard/FormMargin/FormColumn/ModeTabs/Login" unique_id=2061115434]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="LoginEmailLabel" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/FormCard/FormMargin/FormColumn/ModeTabs/Login/FormFields" unique_id=194640377]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.172549, 0.247059, 0.329412, 1)
+text = "Email"
+
+[node name="LoginEmailInput" type="LineEdit" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/FormCard/FormMargin/FormColumn/ModeTabs/Login/FormFields" unique_id=504420207]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0784314, 0.129412, 0.207843, 1)
+theme_override_colors/font_placeholder_color = Color(0.427451, 0.513726, 0.588235, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_input")
+theme_override_styles/read_only = SubResource("StyleBoxFlat_input")
+theme_override_styles/focus = SubResource("StyleBoxFlat_input")
+placeholder_text = "you@example.com"
+
+[node name="LoginPasswordLabel" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/FormCard/FormMargin/FormColumn/ModeTabs/Login/FormFields" unique_id=1106962328]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.172549, 0.247059, 0.329412, 1)
+text = "Password"
+
+[node name="LoginPasswordInput" type="LineEdit" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/FormCard/FormMargin/FormColumn/ModeTabs/Login/FormFields" unique_id=1780150294]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0784314, 0.129412, 0.207843, 1)
+theme_override_colors/font_placeholder_color = Color(0.427451, 0.513726, 0.588235, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_input")
+theme_override_styles/read_only = SubResource("StyleBoxFlat_input")
+theme_override_styles/focus = SubResource("StyleBoxFlat_input")
+placeholder_text = "Password"
+secret = true
+
+[node name="LoginButton" type="Button" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/FormCard/FormMargin/FormColumn/ModeTabs/Login" unique_id=2112456983]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_primary_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_primary_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_primary_button")
+theme_override_styles/focus = SubResource("StyleBoxFlat_primary_button")
+text = "Log In"
+
+[node name="Register" type="VBoxContainer" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/FormCard/FormMargin/FormColumn/ModeTabs" unique_id=1439900705]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 14
+metadata/_tab_index = 1
+
+[node name="FormFields" type="VBoxContainer" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/FormCard/FormMargin/FormColumn/ModeTabs/Register" unique_id=786468600]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="RegisterEmailLabel" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/FormCard/FormMargin/FormColumn/ModeTabs/Register/FormFields" unique_id=828757561]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.172549, 0.247059, 0.329412, 1)
+text = "Email"
+
+[node name="RegisterEmailInput" type="LineEdit" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/FormCard/FormMargin/FormColumn/ModeTabs/Register/FormFields" unique_id=936069613]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0784314, 0.129412, 0.207843, 1)
+theme_override_colors/font_placeholder_color = Color(0.427451, 0.513726, 0.588235, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_input")
+theme_override_styles/read_only = SubResource("StyleBoxFlat_input")
+theme_override_styles/focus = SubResource("StyleBoxFlat_input")
+placeholder_text = "you@example.com"
+
+[node name="RegisterPasswordLabel" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/FormCard/FormMargin/FormColumn/ModeTabs/Register/FormFields" unique_id=356926999]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.172549, 0.247059, 0.329412, 1)
+text = "Password"
+
+[node name="RegisterPasswordInput" type="LineEdit" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/FormCard/FormMargin/FormColumn/ModeTabs/Register/FormFields" unique_id=210096090]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0784314, 0.129412, 0.207843, 1)
+theme_override_colors/font_placeholder_color = Color(0.427451, 0.513726, 0.588235, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_input")
+theme_override_styles/read_only = SubResource("StyleBoxFlat_input")
+theme_override_styles/focus = SubResource("StyleBoxFlat_input")
+placeholder_text = "Choose a password"
+secret = true
+
+[node name="RegisterButton" type="Button" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/FormCard/FormMargin/FormColumn/ModeTabs/Register" unique_id=1385774979]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_primary_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_primary_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_primary_button")
+theme_override_styles/focus = SubResource("StyleBoxFlat_primary_button")
+text = "Create Account"
+
+[node name="AdvancedBox" type="VBoxContainer" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/FormCard/FormMargin/FormColumn" unique_id=1674184182]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="AdvancedLabel" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/FormCard/FormMargin/FormColumn/AdvancedBox" unique_id=371748639]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.317647, 0.403922, 0.490196, 1)
+text = "API Base URL (Developers)"
+
+[node name="ApiBaseUrlInput" type="LineEdit" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/FormCard/FormMargin/FormColumn/AdvancedBox" unique_id=1659949484]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0784314, 0.129412, 0.207843, 1)
+theme_override_colors/font_placeholder_color = Color(0.427451, 0.513726, 0.588235, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_input")
+theme_override_styles/read_only = SubResource("StyleBoxFlat_input")
+theme_override_styles/focus = SubResource("StyleBoxFlat_input")
+placeholder_text = "https://api.moflowai.com"
+
+[node name="FooterActions" type="HBoxContainer" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/FormCard/FormMargin/FormColumn" unique_id=1243295605]
+layout_mode = 2
+
+[node name="RestoreButton" type="Button" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/FormCard/FormMargin/FormColumn/FooterActions" unique_id=1905442131]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.117647, 0.278431, 0.341176, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_secondary_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_secondary_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_secondary_button")
+theme_override_styles/focus = SubResource("StyleBoxFlat_secondary_button")
+text = "Restore Saved Session"
+
+[node name="StatusLabel" type="Label" parent="CenterContainer/GlassPanel/ContentMargin/ContentRow/FormCard/FormMargin/FormColumn" unique_id=1626711720]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.317647, 0.403922, 0.490196, 1)
+text = "Checking for a saved session..."
+autowrap_mode = 3

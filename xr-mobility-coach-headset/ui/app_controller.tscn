@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://d2yhovcrcs4si"]
+
+[ext_resource type="Script" uid="uid://pmuxobulpvr2" path="res://ui/app_controller.gd" id="1_app"]
+[ext_resource type="PackedScene" path="res://ui/auth_panel.tscn" id="2_auth"]
+[ext_resource type="PackedScene" path="res://ui/routine_list_panel.tscn" id="3_routines"]
+[ext_resource type="PackedScene" path="res://ui/coach_select_panel.tscn" id="7_coach_select"]
+[ext_resource type="PackedScene" path="res://ui/playback_panel.tscn" id="6_playback"]
+[ext_resource type="Script" uid="uid://m0lqy5jvnl1y" path="res://scripts/xr_api_client.gd" id="4_api"]
+[ext_resource type="Texture2D" uid="uid://c2oendo2ksayq" path="res://assets/ui/cyan_bg.jpg" id="5_bg"]
+
+[node name="AppController" type="Control" unique_id=1743560065]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_app")
+
+[node name="Background" type="TextureRect" parent="." unique_id=597500271]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_bg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="BackgroundTint" type="ColorRect" parent="." unique_id=544935811]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.905882, 0.972549, 0.980392, 0.09)
+
+[node name="ApiClient" type="Node" parent="." unique_id=1069813681]
+script = ExtResource("4_api")
+
+[node name="AuthPanel" parent="." unique_id=960853312 instance=ExtResource("2_auth")]
+layout_mode = 1
+
+[node name="RoutineListPanel" parent="." unique_id=1186821453 instance=ExtResource("3_routines")]
+visible = false
+layout_mode = 1
+
+[node name="CoachSelectPanel" parent="." instance=ExtResource("7_coach_select")]
+visible = false
+layout_mode = 1
+
+[node name="PlaybackPanel" parent="." instance=ExtResource("6_playback")]
+layout_mode = 1

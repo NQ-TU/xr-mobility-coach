@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://c37khadx63bm7"]
+
+[ext_resource type="Script" uid="uid://cof2exqrxtos" path="res://scripts/coach_avatar.gd" id="1_avatar"]
+[ext_resource type="PackedScene" uid="uid://blc1xb5loikp3" path="res://assets/coaches/coach_b/coach_b.fbx" id="2_model"]
+[ext_resource type="PackedScene" uid="uid://du78577f0mirg" path="res://assets/animations/idling/Standing_relaxed_idle.fbx" id="3_idle"]
+
+[node name="CoachB" type="Node3D" unique_id=1746319792]
+script = ExtResource("1_avatar")
+model_scene = ExtResource("2_model")
+idle_scene = ExtResource("3_idle")
